@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9B1D9EAC-DC11-41CB-8C29-CE3EDD99CAF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HexView.Plugins.Sample</RootNamespace>
+    <AssemblyName>HexView.Sample</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="PE\FlagsAndEnums\COMIMAGE_FLAGS.cs" />
+    <Compile Include="PE\FlagsAndEnums\ResourceTypes.cs" />
+    <Compile Include="PE\Nodes\ResourceDirectoryEntryNode.cs" />
+    <Compile Include="PE\Nodes\ResourceDirectoryNode.cs" />
+    <Compile Include="PE\Templates\CompoundMetaDataTokenColumnDef.cs" />
+    <Compile Include="PE\MetaDataTableStatistics.cs" />
+    <Compile Include="PE\Templates\SimpleMetaDataTokenColumnDef.cs" />
+    <Compile Include="PE\FlagsAndEnums\MetaDataTableCode.cs" />
+    <Compile Include="PE\FlagsAndEnums\HeapSizeFlags.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_FILE_MAGIC.cs" />
+    <Compile Include="PE\Nodes\MetaDataRootNode.cs" />
+    <Compile Include="PE\Templates\MetaDataTokenColumnDef.cs" />
+    <Compile Include="PE\PETemplates.cs" />
+    <Compile Include="PE\Constants.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_DLL_CHARATERISTICS.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_FILE_MACHINE.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_SCN_CHARACTERISTICS.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_SUBSYSTEM.cs" />
+    <Compile Include="PE\FlagsAndEnums\IMAGE_FILE_CHARACTERISTICS.cs" />
+    <Compile Include="PE\PEFormatReader.cs" />
+    <Compile Include="PE\Nodes\PESection.cs" />
+    <Compile Include="PE\Nodes\PESectionList.cs" />
+    <Compile Include="PE\PEStructuralNodeProvider.cs" />
+    <Compile Include="PE\Nodes\StreamHeaderListNode.cs" />
+    <Compile Include="PE\Nodes\StreamListNode.cs" />
+    <Compile Include="PE\FlagsAndEnums\MetaDataTableFlags.cs" />
+    <Compile Include="PE\Nodes\TableStreamNode.cs" />
+    <Compile Include="PE\Templates\TimestampNodeTemplate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HexView.Framework\HexView.Framework.csproj">
+      <Project>{F6C54296-AE50-4FB8-A7BF-2D6FEB03D12F}</Project>
+      <Name>HexView.Framework</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="WTG.Analyzers">
+      <Version>2.0.4</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

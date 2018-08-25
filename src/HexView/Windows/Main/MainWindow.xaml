@@ -1,0 +1,97 @@
+<Window
+	x:Class="HexView.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:HexView"
+	Title="HexView"
+	Icon="\Resources\HexView.ico"
+	Height="500"
+	Width="900"
+	AllowDrop="True"
+	DataContext="{DynamicResource Model}"
+	>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Menu Grid.Row="0">
+			<MenuItem Header="File">
+				<MenuItem Header="Open" Command="ApplicationCommands.Open" />
+				<MenuItem Header="Close" Command="{x:Static local:Commands.CloseDocument}" />
+				<MenuItem Header="Goto" Command="{x:Static local:Commands.Goto}" CommandTarget="{Binding ElementName=HexControl}" />
+				<MenuItem Header="Exit" Command="ApplicationCommands.Close" />
+			</MenuItem>
+		</Menu>
+
+		<Grid
+			Grid.Row="1"
+			KeyboardNavigation.ControlTabNavigation="Cycle"
+			KeyboardNavigation.TabNavigation="Cycle"
+			KeyboardNavigation.DirectionalNavigation="Contained"
+			>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200" />
+				<ColumnDefinition Width="3" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<local:SidePanel
+				/>
+
+			<GridSplitter
+				Grid.Column="1"
+				VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch" />
+
+			<local:HexBox
+				x:Name="HexControl"
+				Grid.Column="2"
+				FontFamily="Courier New"
+				FontSize="13"
+				Data="{Binding Buffer}"
+				>
+				<local:HexBox.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Show Selection" Command="{x:Static local:Commands.ShowSelection}" />
+					</ContextMenu>
+				</local:HexBox.ContextMenu>
+			</local:HexBox>
+		</Grid>
+
+		<StatusBar
+			Grid.Row="2"
+			>
+			<StatusBar.Resources>
+				<Style x:Key="Detail" TargetType="{x:Type Border}">
+					<Setter Property="BorderBrush" Value="{x:Static SystemColors.ControlDarkBrush}" />
+					<Setter Property="BorderThickness" Value="1" />
+					<Setter Property="Margin" Value="5,0,0,0" />
+					<Setter Property="Padding" Value="4,2" />
+				</Style>
+			</StatusBar.Resources>
+
+			<Border Style="{StaticResource Detail}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Offset: " />
+					<TextBlock Text="{Binding SelectionStart, ElementName=HexControl, StringFormat=X8}" />
+				</StackPanel>
+			</Border>
+			<Border Style="{StaticResource Detail}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Length: " />
+					<TextBlock Text="{Binding SelectionLength, ElementName=HexControl, StringFormat=X8}" />
+				</StackPanel>
+			</Border>
+			<Border Style="{StaticResource Detail}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Data Size: " />
+					<TextBlock Text="{Binding Data.ByteCount, ElementName=HexControl, StringFormat=X8}" />
+				</StackPanel>
+			</Border>
+		</StatusBar>
+	</Grid>
+</Window>

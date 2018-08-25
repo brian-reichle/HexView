@@ -1,0 +1,65 @@
+<Window
+	x:Class="HexView.ShowDialog"
+	x:ClassModifier="internal"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Show Selection"
+	Icon="\Resources\HexView.ico"
+	Height="400"
+	Width="600"
+	MinWidth="300"
+	MinHeight="200"
+	Background="{x:Static SystemColors.ControlBrush}"
+	WindowStartupLocation="CenterOwner"
+	>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<StackPanel
+			Grid.Row="0"
+			Orientation="Horizontal"
+			>
+			<Label>Encoding:</Label>
+			<ComboBox
+				Name="EncodingDropDown"
+				Width="200"
+				DisplayMemberPath="DisplayName"
+				/>
+		</StackPanel>
+
+		<TextBox
+			Name="ContentTextBox"
+			Grid.Row="1"
+			IsReadOnly="True"
+			IsReadOnlyCaretVisible="True"
+			VerticalScrollBarVisibility="Auto"
+			HorizontalScrollBarVisibility="Auto"
+			/>
+
+		<Label
+			Name="ErrorLabel"
+			Grid.Row="1"
+			VerticalContentAlignment="Center"
+			HorizontalContentAlignment="Center"
+			Foreground="Gray"
+			Visibility="Collapsed"
+			/>
+		
+		<StackPanel
+			Grid.Row="2"
+			Orientation="Horizontal"
+			FlowDirection="RightToLeft"
+			>
+			<Button
+				Width="75"
+				Content="Close"
+				Command="Close"
+				Margin="2"
+				/>
+		</StackPanel>
+	</Grid>
+</Window>
