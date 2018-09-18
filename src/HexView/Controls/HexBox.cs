@@ -121,15 +121,15 @@ namespace HexView
 			set => SetValue(SelectionLengthProperty, value);
 		}
 
-		public ScrollViewer HorizontalScrollBarVisibility
+		public ScrollBarVisibility HorizontalScrollBarVisibility
 		{
-			get => (ScrollViewer)GetValue(HorizontalScrollBarVisibilityProperty);
+			get => (ScrollBarVisibility)GetValue(HorizontalScrollBarVisibilityProperty);
 			set => SetValue(HorizontalScrollBarVisibilityProperty, value);
 		}
 
-		public ScrollViewer VerticalScrollBarVisibility
+		public ScrollBarVisibility VerticalScrollBarVisibility
 		{
-			get => (ScrollViewer)GetValue(VerticalScrollBarVisibilityProperty);
+			get => (ScrollBarVisibility)GetValue(VerticalScrollBarVisibilityProperty);
 			set => SetValue(VerticalScrollBarVisibilityProperty, value);
 		}
 
