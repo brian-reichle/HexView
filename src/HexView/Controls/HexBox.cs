@@ -15,7 +15,7 @@ namespace HexView
 		public const string ScrollViewerPART = "PART_ScrollViewer";
 
 		public static readonly DependencyProperty DataProperty = DependencyProperty.Register(
-			"Data",
+			nameof(Data),
 			typeof(IDataSource),
 			typeof(HexBox),
 			new FrameworkPropertyMetadata(
@@ -24,13 +24,13 @@ namespace HexView
 				OnDataChanged));
 
 		public static readonly DependencyProperty DataLengthProperty = DependencyProperty.Register(
-			"DataLength",
+			nameof(DataLength),
 			typeof(long),
 			typeof(HexBox),
 			new PropertyMetadata(0L));
 
 		public static readonly DependencyProperty SelectionBrushProperty = DependencyProperty.Register(
-			"SelectionBrush",
+			nameof(SelectionBrush),
 			typeof(Brush),
 			typeof(HexBox),
 			new FrameworkPropertyMetadata(
@@ -39,7 +39,7 @@ namespace HexView
 				OnSelectionChanged));
 
 		public static readonly DependencyProperty SelectionOpacityProperty = DependencyProperty.Register(
-			"SelectionOpacity",
+			nameof(SelectionOpacity),
 			typeof(double),
 			typeof(HexBox),
 			new FrameworkPropertyMetadata(
@@ -48,7 +48,7 @@ namespace HexView
 				OnSelectionChanged));
 
 		public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
-			"SelectionStart",
+			nameof(SelectionStart),
 			typeof(long),
 			typeof(HexBox),
 			new FrameworkPropertyMetadata(
@@ -57,7 +57,7 @@ namespace HexView
 				OnSelectionChanged));
 
 		public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
-			"SelectionLength",
+			nameof(SelectionLength),
 			typeof(long),
 			typeof(HexBox),
 			new FrameworkPropertyMetadata(

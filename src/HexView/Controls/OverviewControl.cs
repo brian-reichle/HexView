@@ -9,7 +9,7 @@ namespace HexView
 	class OverviewControl : Control
 	{
 		public static readonly DependencyProperty DataLengthProperty = DependencyProperty.Register(
-			"DataLength",
+			nameof(DataLength),
 			typeof(long),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(
@@ -18,7 +18,7 @@ namespace HexView
 				OnDataLengthChanged));
 
 		public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
-			"SelectionStart",
+			nameof(SelectionStart),
 			typeof(long),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(
@@ -27,7 +27,7 @@ namespace HexView
 				OnSelectionRangeChanged));
 
 		public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
-			"SelectionLength",
+			nameof(SelectionLength),
 			typeof(long),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(
@@ -36,19 +36,19 @@ namespace HexView
 				OnSelectionRangeChanged));
 
 		public static readonly DependencyProperty DataBrushProperty = DependencyProperty.Register(
-			"DataBrush",
+			nameof(DataBrush),
 			typeof(Brush),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
 		public static readonly DependencyProperty SelectionBrushProperty = DependencyProperty.Register(
-			"SelectionBrush",
+			nameof(SelectionBrush),
 			typeof(Brush),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
 		public static readonly DependencyProperty SelectionOpacityProperty = DependencyProperty.Register(
-			"SelectionOpacity",
+			nameof(SelectionOpacity),
 			typeof(double),
 			typeof(OverviewControl),
 			new FrameworkPropertyMetadata(0.25d, FrameworkPropertyMetadataOptions.AffectsRender));
