@@ -39,28 +39,19 @@ namespace HexView
 			"DataBrush",
 			typeof(Brush),
 			typeof(OverviewControl),
-			new FrameworkPropertyMetadata(
-				null,
-				FrameworkPropertyMetadataOptions.AffectsRender,
-				OnBrushChanged));
+			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
 		public static readonly DependencyProperty SelectionBrushProperty = DependencyProperty.Register(
 			"SelectionBrush",
 			typeof(Brush),
 			typeof(OverviewControl),
-			new FrameworkPropertyMetadata(
-				null,
-				FrameworkPropertyMetadataOptions.AffectsRender,
-				OnBrushChanged));
+			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
 		public static readonly DependencyProperty SelectionOpacityProperty = DependencyProperty.Register(
 			"SelectionOpacity",
 			typeof(double),
 			typeof(OverviewControl),
-			new FrameworkPropertyMetadata(
-				0.25d,
-				FrameworkPropertyMetadataOptions.AffectsRender,
-				OnBrushChanged));
+			new FrameworkPropertyMetadata(0.25d, FrameworkPropertyMetadataOptions.AffectsRender));
 
 		public long DataLength
 		{
@@ -221,20 +212,12 @@ namespace HexView
 			var control = (OverviewControl)d;
 			control._dirtyDataGeometry = true;
 			control._dirtySelectionGeomertry = true;
-			control.InvalidateVisual();
 		}
 
 		static void OnSelectionRangeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var control = (OverviewControl)d;
 			control._dirtySelectionGeomertry = true;
-			control.InvalidateVisual();
-		}
-
-		static void OnBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			var control = (OverviewControl)d;
-			control.InvalidateVisual();
 		}
 
 		Geometry DataGeometry
