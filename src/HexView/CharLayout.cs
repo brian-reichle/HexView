@@ -310,11 +310,9 @@ namespace HexView
 		readonly double[] _columnPositions;
 		readonly CellSpacing _full;
 
-#pragma warning disable SA1005 // Single line comments must begin with single space
-		//           | Byte Section                                      | Char Section
+		// |         | Byte Section                                      | Char Section
 		// xxxxxxxx  xx xx xx xx  xx xx xx xx  xx xx xx xx  xx xx xx xx  xxxx xxxx xxxx xxxx
 		static readonly int[] _baseOffsets =
-#pragma warning restore SA1005 // Single line comments must begin with single space
 		{
 			1, 1, 1, 1, 1, 1, 1, 3,
 			1, 2, 1, 2, 1, 2, 1, 3,
