@@ -6,6 +6,7 @@
     <WarningLevel>4</WarningLevel>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
+    <OutputPath Condition=" '$(IsPlugin)' == 'True' ">$(MSBuildThisFileDirectory)bin\$(Configuration)\Plugins\</OutputPath>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)build\HexView.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 <!--
