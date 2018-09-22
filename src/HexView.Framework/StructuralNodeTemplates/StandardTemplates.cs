@@ -16,6 +16,9 @@ namespace HexView.Framework
 		public static readonly IStructuralNodeTemplate UInt32 = new SimpleNodeTemplate<uint>();
 		public static readonly IStructuralNodeTemplate UInt64 = new SimpleNodeTemplate<ulong>();
 
+		public static readonly IStructuralNodeTemplate Single = new SimpleNodeTemplate<float>();
+		public static readonly IStructuralNodeTemplate Double = new SimpleNodeTemplate<double>();
+
 		public static readonly IStructuralNodeTemplate Guid = new SimpleNodeTemplate<Guid>();
 
 		public static IStructuralNodeTemplate Enum<T>()
