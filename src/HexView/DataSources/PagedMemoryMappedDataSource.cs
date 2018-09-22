@@ -21,7 +21,7 @@ namespace HexView
 			_mru = new LinkedList<PageData>();
 		}
 
-		public override long ByteCount { get; }
+		public override long ByteCount => _length;
 
 		public override T Read<T>(long offset)
 		{
