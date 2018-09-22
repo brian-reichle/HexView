@@ -347,7 +347,11 @@ namespace HexView
 		LineSet CalculateLines(long startingLine, int count)
 		{
 			var blob = _parent.Data;
-			if (blob == null || count == 0) return null;
+
+			if (blob == null || count == 0)
+			{
+				return new LineSet(startingLine, Array.Empty<GlyphRun>());
+			}
 
 			var y = 0d;
 			var runs = new GlyphRun[count];

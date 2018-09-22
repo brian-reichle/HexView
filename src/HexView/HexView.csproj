@@ -50,6 +50,7 @@
     </ApplicationDefinition>
     <Compile Include="CharLayout.cs" />
     <Compile Include="Controls\HexBoxDisplaySection.cs" />
+    <Compile Include="DataSources\EmptyDataSource.cs" />
     <Compile Include="Plugin\NullFormatReader.cs" />
     <Compile Include="DataSources\PagedMemoryMappedDataSource.cs" />
     <Compile Include="Controls\OverviewControl.cs" />

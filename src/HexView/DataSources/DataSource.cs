@@ -18,7 +18,11 @@ namespace HexView
 			{
 				var length = file.Length;
 
-				if (length > SizeCutoff)
+				if (length <= 0)
+				{
+					return EmptyDataSource.Instance;
+				}
+				else if (length > SizeCutoff)
 				{
 					return new PagedMemoryMappedDataSource(MemoryMappedFile.CreateFromFile(file, null, length, access, null, HandleInheritability.None, true), length);
 				}
