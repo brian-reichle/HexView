@@ -5,7 +5,7 @@ namespace HexView
 {
 	static class HexHelper
 	{
-		public static readonly string HexChars = "0123456789ABCDEF";
+		public const string HexChars = "0123456789ABCDEF";
 
 		public static long Parse(string value)
 		{

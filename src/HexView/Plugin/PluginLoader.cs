@@ -23,7 +23,7 @@ namespace HexView
 			{
 				foreach (var filename in Directory.GetFiles(directory))
 				{
-					if (filename.EndsWith(".dll"))
+					if (filename.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
 					{
 						var plugin = Load(filename);
 

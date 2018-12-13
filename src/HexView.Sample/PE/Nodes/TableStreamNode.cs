@@ -1,6 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using HexView.Framework;
 
 namespace HexView.Plugins.Sample.PE
@@ -61,7 +62,7 @@ namespace HexView.Plugins.Sample.PE
 			return tables;
 		}
 
-		IStructuralNodeTemplate CreateRowTemplate(MetaDataTableStatistics statistics, MetaDataTableCodes code)
+		static IStructuralNodeTemplate CreateRowTemplate(MetaDataTableStatistics statistics, MetaDataTableCodes code)
 		{
 			switch (code)
 			{
@@ -530,7 +531,7 @@ namespace HexView.Plugins.Sample.PE
 		static Func<int, long, string> GetMetaDataTokenFormatter(MetaDataTableCodes code)
 		{
 			var tmp = ((int)code) << 24;
-			return (i, l) => ((i + 1) | tmp).ToString("X08");
+			return (i, l) => ((i + 1) | tmp).ToString("X08", CultureInfo.InvariantCulture);
 		}
 
 		static MetaDataTableCodes[] GetCodes(MetaDataTableFlags flags)

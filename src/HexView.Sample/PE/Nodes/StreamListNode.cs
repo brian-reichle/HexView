@@ -1,4 +1,5 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
+using System.Globalization;
 using HexView.Framework;
 
 namespace HexView.Plugins.Sample.PE
@@ -33,7 +34,7 @@ namespace HexView.Plugins.Sample.PE
 			switch (name)
 			{
 				case "#GUID":
-					var template = new RepeatingNodeTemplate(StandardTemplates.Guid, (int)(length >> 4), (i, l) => (i + 1).ToString("X08"));
+					var template = new RepeatingNodeTemplate(StandardTemplates.Guid, (int)(length >> 4), (i, l) => (i + 1).ToString("X08", CultureInfo.InvariantCulture));
 					return new TemplatedStructuralNode(_provider.Data, this, name, template, fileOffset);
 
 				case "#~":

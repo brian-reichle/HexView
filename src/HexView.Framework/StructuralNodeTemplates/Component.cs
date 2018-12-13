@@ -1,6 +1,8 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
 
+#pragma warning disable CA1815 // Override equals and operator equals on value types
+
 namespace HexView.Framework
 {
 	public struct Component
@@ -14,8 +16,10 @@ namespace HexView.Framework
 			Offset = offset;
 		}
 
-		public readonly string Name;
-		public readonly IStructuralNodeTemplate Template;
-		public readonly long Offset;
+		public string Name { get; }
+		public IStructuralNodeTemplate Template { get; }
+		public long Offset { get; }
 	}
 }
+
+#pragma warning restore CA1815 // Override equals and operator equals on value types

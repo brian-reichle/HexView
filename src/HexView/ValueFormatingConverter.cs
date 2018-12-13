@@ -81,35 +81,35 @@ namespace HexView
 			switch (convertable.GetTypeCode())
 			{
 				case TypeCode.SByte:
-					builder.AppendFormat("0x{0:X2}: {0}\r\n", convertable.ToSByte(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X2}: {0}\r\n", convertable.ToSByte(null));
 					break;
 
 				case TypeCode.Int16:
-					builder.AppendFormat("0x{0:X4}: {0}\r\n", convertable.ToInt16(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X4}: {0}\r\n", convertable.ToInt16(null));
 					break;
 
 				case TypeCode.Int32:
-					builder.AppendFormat("0x{0:X8}: {0}\r\n", convertable.ToInt32(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X8}: {0}\r\n", convertable.ToInt32(null));
 					break;
 
 				case TypeCode.Int64:
-					builder.AppendFormat("0x{0:X16}: {0}\r\n", convertable.ToInt64(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X16}: {0}\r\n", convertable.ToInt64(null));
 					break;
 
 				case TypeCode.Byte:
-					builder.AppendFormat("0x{0:X2}: {0}\r\n", convertable.ToByte(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X2}: {0}\r\n", convertable.ToByte(null));
 					break;
 
 				case TypeCode.UInt16:
-					builder.AppendFormat("0x{0:X4}: {0}\r\n", convertable.ToUInt16(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X4}: {0}\r\n", convertable.ToUInt16(null));
 					break;
 
 				case TypeCode.UInt32:
-					builder.AppendFormat("0x{0:X8}: {0}\r\n", convertable.ToUInt32(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X8}: {0}\r\n", convertable.ToUInt32(null));
 					break;
 
 				case TypeCode.UInt64:
-					builder.AppendFormat("0x{0:X16}: {0}\r\n", convertable.ToUInt64(null));
+					builder.AppendFormat(CultureInfo.InvariantCulture, "0x{0:X16}: {0}\r\n", convertable.ToUInt64(null));
 					break;
 
 				case TypeCode.Char:
@@ -125,7 +125,7 @@ namespace HexView
 					break;
 
 				default:
-					builder.AppendFormat("{0}\r\n", convertable);
+					builder.AppendFormat(CultureInfo.InvariantCulture, "{0}\r\n", convertable);
 					break;
 			}
 		}
@@ -133,7 +133,7 @@ namespace HexView
 		static void AppendCharValue(StringBuilder builder, char value)
 		{
 			builder.Append("0x");
-			builder.Append(((int)value).ToString("X4"));
+			builder.Append(((int)value).ToString("X4", CultureInfo.InvariantCulture));
 			builder.Append(": '");
 			AppendChar(builder, value, false);
 			builder.Append('\'');
@@ -179,7 +179,7 @@ namespace HexView
 					if (value < 0x20 || value >= 0x7F)
 					{
 						builder.Append("\\u");
-						builder.Append(((int)value).ToString("X4"));
+						builder.Append(((int)value).ToString("X4", CultureInfo.InvariantCulture));
 					}
 					else
 					{
@@ -191,14 +191,14 @@ namespace HexView
 
 		static void AppendDateTime(StringBuilder builder, DateTime dateTime)
 		{
-			builder.AppendFormat("{0:O}\r\n{1:F}\r\n", dateTime, dateTime.ToLocalTime());
+			builder.AppendFormat(CultureInfo.InvariantCulture, "{0:O}\r\n{1:F}\r\n", dateTime, dateTime.ToLocalTime());
 		}
 
 		static void AppendEnumBreakdown(StringBuilder builder, Type enumType, ulong value, string formatString, Func<ulong, object> box)
 		{
 			if (value == 0 || !IsFlags(enumType))
 			{
-				var label = value.ToString(formatString);
+				var label = value.ToString(formatString, CultureInfo.InvariantCulture);
 
 				if (Enum.IsDefined(enumType, box(value)))
 				{
@@ -222,7 +222,7 @@ namespace HexView
 
 					if (Enum.IsDefined(enumType, box(tmp)))
 					{
-						var label = "0x" + tmp.ToString(formatString) + ": " + Enum.GetName(enumType, box(tmp));
+						var label = "0x" + tmp.ToString(formatString, CultureInfo.InvariantCulture) + ": " + Enum.GetName(enumType, box(tmp));
 						builder.AppendLine(label);
 					}
 					else
@@ -234,7 +234,7 @@ namespace HexView
 
 				if (fail != 0)
 				{
-					var label = "0x" + fail.ToString(formatString) + ": <unknown flags>";
+					var label = "0x" + fail.ToString(formatString, CultureInfo.InvariantCulture) + ": <unknown flags>";
 					builder.AppendLine(label);
 				}
 			}

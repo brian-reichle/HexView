@@ -16,7 +16,7 @@ namespace HexView
 
 			if (longValue.HasValue)
 			{
-				return longValue.Value.ToString("X");
+				return longValue.Value.ToString("X", CultureInfo.InvariantCulture);
 			}
 
 			return null;

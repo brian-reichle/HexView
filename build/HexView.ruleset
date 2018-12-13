@@ -67,4 +67,9 @@
     <Rule Id="WPF0090" Action="Warning" />
     <Rule Id="WPF0091" Action="Warning" />
   </Rules>
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+    <Rule Id="CA1710" Action="None" />
+    <Rule Id="CA1720" Action="None" />
+    <Rule Id="CA1812" Action="None" />
+  </Rules>
 </RuleSet>
