@@ -1,5 +1,6 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
@@ -33,12 +34,15 @@ namespace HexView
 
 		public override string ReadText(long offset, int length, Encoding encoding)
 		{
-			return encoding.GetString(ReadBytes(offset, length));
+			var buffer = ArrayPool<byte>.Shared.Rent(length);
+			ReadBytes(offset, length, buffer);
+			var result = encoding.GetString(buffer, 0, length);
+			ArrayPool<byte>.Shared.Return(buffer);
+			return result;
 		}
 
-		byte[] ReadBytes(long offset, int length)
+		void ReadBytes(long offset, int length, byte[] buffer)
 		{
-			var buffer = new byte[length];
 			var bufferOffset = 0;
 
 			while (true)
@@ -55,8 +59,6 @@ namespace HexView
 				offset += blockSize;
 				blockSize = Math.Min((int)PageSize, length);
 			}
-
-			return buffer;
 		}
 
 		protected override void Dispose(bool isDisposing)
