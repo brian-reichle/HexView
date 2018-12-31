@@ -12,6 +12,10 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
+[*.csproj]
+charset = utf-8-bom
+insert_final_newline = false
+
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 [*.{cs,vb}]
 dotnet_style_qualification_for_field = false:suggestion
