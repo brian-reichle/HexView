@@ -18,7 +18,7 @@ CS1591 - Missing XML comment.
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <Copyright>Copyright © Brian Reichle 2013-2018</Copyright>
+    <Copyright>Copyright © Brian Reichle 2013-2019</Copyright>
     <Authors>Brian Reichle</Authors>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
