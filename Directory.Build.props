@@ -5,7 +5,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(MSBuildProjectName)\</OutputPath>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)build\HexView.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 <!--
