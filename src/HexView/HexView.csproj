@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <None Remove="Resources\HexView.ico" />
-    <Compile Include="..\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
     <Resource Include="Resources\HexView.ico" />
   </ItemGroup>
 
