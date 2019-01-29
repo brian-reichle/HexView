@@ -4,3 +4,4 @@ bin
 
 # Visual Studio
 .vs
+*.csproj.user
