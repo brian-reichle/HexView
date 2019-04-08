@@ -3,7 +3,7 @@
   <ItemGroup>
     <GlobalPackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" />
     <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-    <GlobalPackageReference Include="WTG.Analyzers" Version="2.0.6" />
+    <GlobalPackageReference Include="WTG.Analyzers" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>

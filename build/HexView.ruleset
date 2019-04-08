@@ -46,6 +46,10 @@
     <Rule Id="WTG1010" Action="Warning" />
     <Rule Id="WTG1011" Action="Warning" />
     <Rule Id="WTG1012" Action="Warning" />
+    <Rule Id="WTG1013" Action="Warning" />
+    <Rule Id="WTG1014" Action="Warning" />
+    <Rule Id="WTG1015" Action="Warning" />
+    <Rule Id="WTG1016" Action="Warning" />
     <Rule Id="WTG3001" Action="Warning" />
     <Rule Id="WTG3002" Action="Warning" />
     <Rule Id="WTG3003" Action="Warning" />
@@ -53,6 +57,11 @@
     <Rule Id="WTG3102" Action="Warning" />
     <Rule Id="WTG3103" Action="Warning" />
     <Rule Id="WTG3004" Action="Warning" />
+    <Rule Id="WTG3005" Action="Warning" />
+    <Rule Id="WTG3006" Action="Warning" />
+    <Rule Id="WTG3007" Action="Warning" />
+    <Rule Id="WTG3008" Action="Warning" />
+    <Rule Id="WTG3009" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="WpfAnalyzers" RuleNamespace="WpfAnalyzers">
     <Rule Id="WPF0023" Action="None" />
