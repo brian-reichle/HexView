@@ -5,6 +5,7 @@
     <Description Resource="MinimumRecommendedRules_Description" />
   </Localization>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA0001" Action="None" />
     <Rule Id="SA1515" Action="None" />
     <Rule Id="SA1516" Action="None" />
     <Rule Id="SA1202" Action="None" />
@@ -33,6 +34,9 @@
     <Rule Id="SA1118" Action="None" />
     <Rule Id="SA1129" Action="None" />
     <Rule Id="SA1512" Action="None" />
+    <Rule Id="SA1600" Action="None" />
+    <Rule Id="SA1601" Action="None" />
+    <Rule Id="SA1602" Action="None" />
   </Rules>
   <Rules AnalyzerId="WTG.Analyzers" RuleNamespace="WTG.Analyzers">
     <Rule Id="WTG1001" Action="Warning" />
