@@ -170,7 +170,9 @@ namespace HexView
 
 			try
 			{
+#pragma warning disable CA2000 // CA2000 fails to detect that newSource will not be set if DataSource.Load() throws.
 				newSource = DataSource.Load(filename);
+#pragma warning restore CA2000 // Dispose objects before losing scope
 			}
 			catch (IOException ex)
 			{
