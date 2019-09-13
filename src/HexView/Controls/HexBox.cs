@@ -376,6 +376,6 @@ namespace HexView
 
 		HexBoxView _view;
 		Point _dragFrom;
-		DispatcherTimer _autoScrollTick;
+		readonly DispatcherTimer _autoScrollTick;
 	}
 }

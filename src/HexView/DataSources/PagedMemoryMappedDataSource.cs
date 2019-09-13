@@ -57,7 +57,6 @@ namespace HexView
 
 				bufferOffset += blockSize;
 				offset += blockSize;
-				blockSize = Math.Min((int)PageSize, length);
 			}
 		}
 
