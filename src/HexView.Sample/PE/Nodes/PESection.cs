@@ -22,7 +22,7 @@ namespace HexView.Plugins.Sample.PE
 				{
 					_name = Helper.ReadASCIIStringNode(
 						_provider.Data,
-						this._tableReccordOffset + Constants.Section_Name_Offset,
+						_tableReccordOffset + Constants.Section_Name_Offset,
 						Constants.Section_Name_Length);
 				}
 

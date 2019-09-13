@@ -13,9 +13,7 @@ namespace HexView
 
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
-			var strValue = (string)value;
-
-			if (!HexHelper.TryParse(strValue, out var longValue))
+			if (!HexHelper.TryParse((string)value, out _))
 			{
 				return new ValidationResult(false, "Invalid Value");
 			}

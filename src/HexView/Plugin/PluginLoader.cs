@@ -57,7 +57,7 @@ namespace HexView
 
 		static IPlugin Load(string filename)
 		{
-			Assembly ass = null;
+			Assembly ass;
 
 			try
 			{
