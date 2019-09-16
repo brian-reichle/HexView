@@ -47,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HexView.Data\HexView.Data.csproj" />
     <ProjectReference Include="..\HexView.Framework\HexView.Framework.csproj" />
     <ProjectReference Include="..\HexView.Sample\HexView.Sample.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

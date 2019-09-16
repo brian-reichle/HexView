@@ -5,9 +5,9 @@ using System.IO.MemoryMappedFiles;
 using System.Text;
 using HexView.Framework;
 
-namespace HexView
+namespace HexView.Data
 {
-	abstract class DataSource : IDataSource, IDisposable
+	public abstract class DataSource : IDataSource, IDisposable
 	{
 		public static DataSource Load(string filename)
 		{
@@ -24,11 +24,11 @@ namespace HexView
 				}
 				else if (length > SizeCutoff)
 				{
-					return new PagedMemoryMappedDataSource(MemoryMappedFile.CreateFromFile(file, null, length, access, null, HandleInheritability.None, true), length);
+					return new PagedMemoryMappedDataSource(MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, true), length);
 				}
 				else
 				{
-					using (var map = MemoryMappedFile.CreateFromFile(file, null, length, access, null, HandleInheritability.None, true))
+					using (var map = MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, true))
 					{
 						return new MemoryMappedDataSource(map.CreateViewAccessor(0, length, access), length);
 					}

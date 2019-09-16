@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexView.Sample", "HexView.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexView.Framework.Test", "HexView.Framework.Test\HexView.Framework.Test.csproj", "{AFC391FE-99B8-4A95-B26C-1464A74ED464}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexView.Data", "HexView.Data\HexView.Data.csproj", "{E6759758-0CEF-419D-8479-AA782AE7B7B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{AFC391FE-99B8-4A95-B26C-1464A74ED464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFC391FE-99B8-4A95-B26C-1464A74ED464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFC391FE-99B8-4A95-B26C-1464A74ED464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6759758-0CEF-419D-8479-AA782AE7B7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6759758-0CEF-419D-8479-AA782AE7B7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6759758-0CEF-419D-8479-AA782AE7B7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6759758-0CEF-419D-8479-AA782AE7B7B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

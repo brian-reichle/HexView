@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using HexView.Data;
 using HexView.Framework;
 using Microsoft.Win32;
 
