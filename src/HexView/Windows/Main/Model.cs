@@ -1,6 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System.ComponentModel;
 using System.Diagnostics;
+using HexView.Data;
 using HexView.Framework;
 
 namespace HexView

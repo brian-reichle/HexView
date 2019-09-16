@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
 using System.Text;
 
-namespace HexView
+namespace HexView.Data
 {
 	[DebuggerDisplay("Count = {ByteCount}")]
 	sealed class PagedMemoryMappedDataSource : DataSource

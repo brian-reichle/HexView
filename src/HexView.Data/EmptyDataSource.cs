@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace HexView
+namespace HexView.Data
 {
 	sealed class EmptyDataSource : DataSource
 	{
