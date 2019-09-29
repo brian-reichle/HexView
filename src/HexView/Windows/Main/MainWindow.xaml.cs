@@ -6,6 +6,7 @@ using System.Windows.Input;
 using HexView.Data;
 using HexView.Framework;
 using Microsoft.Win32;
+using Range = HexView.Framework.Range;
 
 namespace HexView
 {
@@ -181,10 +182,8 @@ namespace HexView
 				return;
 			}
 
-			using (var oldSource = Model.Buffer)
-			{
-				Model.Buffer = newSource;
-			}
+			using var oldSource = Model.Buffer;
+			Model.Buffer = newSource;
 		}
 
 		void CloseFile()

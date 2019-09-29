@@ -41,10 +41,8 @@ namespace HexView.Data.Test
 
 		static DataSource CreateDataSource()
 		{
-			using (var file = MapFactory.CreatePatterenedMap(Length))
-			{
-				return new MemoryMappedDataSource(file.CreateViewAccessor(), Length);
-			}
+			using var file = MapFactory.CreatePatterenedMap(Length);
+			return new MemoryMappedDataSource(file.CreateViewAccessor(), Length);
 		}
 
 		const int Length = 0x100;

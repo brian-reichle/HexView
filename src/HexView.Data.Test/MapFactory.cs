@@ -26,12 +26,10 @@ namespace HexView.Data.Test
 
 		static void WritePattern(MemoryMappedFile file, int size)
 		{
-			using (var accessor = file.CreateViewAccessor())
+			using var accessor = file.CreateViewAccessor();
+			for (var index = 0; index < size; index++)
 			{
-				for (var index = 0; index < size; index++)
-				{
-					accessor.Write(index, (byte)(index & 0xFF));
-				}
+				accessor.Write(index, (byte)(index & 0xFF));
 			}
 		}
 	}

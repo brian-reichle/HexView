@@ -78,17 +78,12 @@ namespace HexView.Plugins.Sample.PE
 		{
 			var name = Constants.GetDirectoryName(dictionaryIndex);
 
-			switch (dictionaryIndex)
+			return dictionaryIndex switch
 			{
-				case Constants.Directory_Index_Resources:
-					return new ResourceDirectoryNode(_provider, this, fileOffset, fileOffset, 0);
-
-				case Constants.Directory_Index_CLI:
-					return new TemplatedStructuralNode(_provider.Data, this, name, PETemplates.CLIHeaderTemplate, fileOffset);
-
-				default:
-					return new TemplatedStructuralNode(_provider.Data, this, name, StandardTemplates.Blob(fileLength), fileOffset);
-			}
+				Constants.Directory_Index_Resources => new ResourceDirectoryNode(_provider, this, fileOffset, fileOffset, 0),
+				Constants.Directory_Index_CLI => new TemplatedStructuralNode(_provider.Data, this, name, PETemplates.CLIHeaderTemplate, fileOffset),
+				_ => new TemplatedStructuralNode(_provider.Data, this, name, StandardTemplates.Blob(fileLength), fileOffset),
+			};
 		}
 
 		string _name;
