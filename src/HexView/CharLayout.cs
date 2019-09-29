@@ -132,13 +132,13 @@ namespace HexView
 				toPoint = tmp;
 			}
 
-			switch (category)
+			return category switch
 			{
-				case Section_Index: return RangeFromDrag_FullLines(fromPoint, toPoint);
-				case Section_Byte: return RangeFromDrag_Bytes(fromPoint, toPoint);
-				case Section_Char: return RangeFromDrag_Chars(fromPoint, toPoint);
-				default: return null;
-			}
+				Section_Index => RangeFromDrag_FullLines(fromPoint, toPoint),
+				Section_Byte => RangeFromDrag_Bytes(fromPoint, toPoint),
+				Section_Char => RangeFromDrag_Chars(fromPoint, toPoint),
+				_ => null,
+			};
 		}
 
 		Range RangeFromDrag_FullLines(Point fromPoint, Point toPoint)

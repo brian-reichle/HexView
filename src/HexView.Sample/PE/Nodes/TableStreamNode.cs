@@ -64,49 +64,48 @@ namespace HexView.Plugins.Sample.PE
 
 		static IStructuralNodeTemplate CreateRowTemplate(MetaDataTableStatistics statistics, MetaDataTableCodes code)
 		{
-			switch (code)
+			return code switch
 			{
-				case MetaDataTableCodes.Module: return CreateRowNode_Module(statistics);
-				case MetaDataTableCodes.TypeRef: return CreateRowNode_TypeRef(statistics);
-				case MetaDataTableCodes.TypeDef: return CreateRowNode_TypeDef(statistics);
-				case MetaDataTableCodes.Field: return CreateRowNode_FieldDef(statistics);
-				case MetaDataTableCodes.MethodDef: return CreateRowNode_MethodDef(statistics);
-				case MetaDataTableCodes.Param: return CreateRowNode_Param(statistics);
-				case MetaDataTableCodes.InterfaceImpl: return CreateRowNode_InterfaceImpl(statistics);
-				case MetaDataTableCodes.MemberRef: return CreateRowNode_MemberRef(statistics);
-				case MetaDataTableCodes.Constant: return CreateRowNode_Constant(statistics);
-				case MetaDataTableCodes.CustomAttribute: return CreateRowNode_CustomAttribute(statistics);
-				case MetaDataTableCodes.FieldMarshal: return CreateRowNode_FieldMarshal(statistics);
-				case MetaDataTableCodes.DeclSecurity: return CreateRowNode_DeclSecurity(statistics);
-				case MetaDataTableCodes.ClassLayout: return CreateRowNode_ClassLayout(statistics);
-				case MetaDataTableCodes.FieldLayout: return CreateRowNode_FieldLayout(statistics);
-				case MetaDataTableCodes.StandAloneSig: return CreateRowNode_StandAloneSig(statistics);
-				case MetaDataTableCodes.EventMap: return CreateRowNode_EventMap(statistics);
-				case MetaDataTableCodes.Event: return CreateRowNode_Event(statistics);
-				case MetaDataTableCodes.PropertyMap: return CreateRowNode_PropertyMap(statistics);
-				case MetaDataTableCodes.Property: return CreateRowNode_Property(statistics);
-				case MetaDataTableCodes.MethodSemantics: return CreateRowNode_MethodSemantics(statistics);
-				case MetaDataTableCodes.MethodImpl: return CreateRowNode_MethodImpl(statistics);
-				case MetaDataTableCodes.ModuleRef: return CreateRowNode_ModuleRef(statistics);
-				case MetaDataTableCodes.TypeSpec: return CreateRowNode_TypeSpec(statistics);
-				case MetaDataTableCodes.ImplMap: return CreateRowNode_ImplMap(statistics);
-				case MetaDataTableCodes.FieldRVA: return CreateRowNode_FieldRVA(statistics);
-				case MetaDataTableCodes.Assembly: return CreateRowNode_Assembly(statistics);
-				case MetaDataTableCodes.AssemblyProcessor: return RowNode_AssemblyProcessor;
-				case MetaDataTableCodes.AssemblyOS: return RowNode_AssemblyOS;
-				case MetaDataTableCodes.AssemblyRef: return CreateRowNode_AssemblyRef(statistics);
-				case MetaDataTableCodes.AssemblyRefProcessor: return CreateRowNode_AssemblyRefProcessor(statistics);
-				case MetaDataTableCodes.AssemblyRefOS: return CreateRowNode_AssemblyRefOS(statistics);
-				case MetaDataTableCodes.File: return CreateRowNode_File(statistics);
-				case MetaDataTableCodes.ExportedType: return CreateRowNode_ExportedType(statistics);
-				case MetaDataTableCodes.ManifestResource: return CreateRowNode_ManifestResource(statistics);
-				case MetaDataTableCodes.NestedClass: return CreateRowNode_NestedClass(statistics);
-				case MetaDataTableCodes.GenericParam: return CreateRowNode_GenericParam(statistics);
-				case MetaDataTableCodes.MethodSpec: return CreateRowNode_MethodSpec(statistics);
-				case MetaDataTableCodes.GenericParamConstraint: return CreateRowNode_GenericParamConstraint(statistics);
-			}
-
-			return null;
+				MetaDataTableCodes.Module => CreateRowNode_Module(statistics),
+				MetaDataTableCodes.TypeRef => CreateRowNode_TypeRef(statistics),
+				MetaDataTableCodes.TypeDef => CreateRowNode_TypeDef(statistics),
+				MetaDataTableCodes.Field => CreateRowNode_FieldDef(statistics),
+				MetaDataTableCodes.MethodDef => CreateRowNode_MethodDef(statistics),
+				MetaDataTableCodes.Param => CreateRowNode_Param(statistics),
+				MetaDataTableCodes.InterfaceImpl => CreateRowNode_InterfaceImpl(statistics),
+				MetaDataTableCodes.MemberRef => CreateRowNode_MemberRef(statistics),
+				MetaDataTableCodes.Constant => CreateRowNode_Constant(statistics),
+				MetaDataTableCodes.CustomAttribute => CreateRowNode_CustomAttribute(statistics),
+				MetaDataTableCodes.FieldMarshal => CreateRowNode_FieldMarshal(statistics),
+				MetaDataTableCodes.DeclSecurity => CreateRowNode_DeclSecurity(statistics),
+				MetaDataTableCodes.ClassLayout => CreateRowNode_ClassLayout(statistics),
+				MetaDataTableCodes.FieldLayout => CreateRowNode_FieldLayout(statistics),
+				MetaDataTableCodes.StandAloneSig => CreateRowNode_StandAloneSig(statistics),
+				MetaDataTableCodes.EventMap => CreateRowNode_EventMap(statistics),
+				MetaDataTableCodes.Event => CreateRowNode_Event(statistics),
+				MetaDataTableCodes.PropertyMap => CreateRowNode_PropertyMap(statistics),
+				MetaDataTableCodes.Property => CreateRowNode_Property(statistics),
+				MetaDataTableCodes.MethodSemantics => CreateRowNode_MethodSemantics(statistics),
+				MetaDataTableCodes.MethodImpl => CreateRowNode_MethodImpl(statistics),
+				MetaDataTableCodes.ModuleRef => CreateRowNode_ModuleRef(statistics),
+				MetaDataTableCodes.TypeSpec => CreateRowNode_TypeSpec(statistics),
+				MetaDataTableCodes.ImplMap => CreateRowNode_ImplMap(statistics),
+				MetaDataTableCodes.FieldRVA => CreateRowNode_FieldRVA(statistics),
+				MetaDataTableCodes.Assembly => CreateRowNode_Assembly(statistics),
+				MetaDataTableCodes.AssemblyProcessor => RowNode_AssemblyProcessor,
+				MetaDataTableCodes.AssemblyOS => RowNode_AssemblyOS,
+				MetaDataTableCodes.AssemblyRef => CreateRowNode_AssemblyRef(statistics),
+				MetaDataTableCodes.AssemblyRefProcessor => CreateRowNode_AssemblyRefProcessor(statistics),
+				MetaDataTableCodes.AssemblyRefOS => CreateRowNode_AssemblyRefOS(statistics),
+				MetaDataTableCodes.File => CreateRowNode_File(statistics),
+				MetaDataTableCodes.ExportedType => CreateRowNode_ExportedType(statistics),
+				MetaDataTableCodes.ManifestResource => CreateRowNode_ManifestResource(statistics),
+				MetaDataTableCodes.NestedClass => CreateRowNode_NestedClass(statistics),
+				MetaDataTableCodes.GenericParam => CreateRowNode_GenericParam(statistics),
+				MetaDataTableCodes.MethodSpec => CreateRowNode_MethodSpec(statistics),
+				MetaDataTableCodes.GenericParamConstraint => CreateRowNode_GenericParamConstraint(statistics),
+				_ => null,
+			};
 		}
 
 		static IStructuralNodeTemplate CreateRowNode_Module(MetaDataTableStatistics statistics)

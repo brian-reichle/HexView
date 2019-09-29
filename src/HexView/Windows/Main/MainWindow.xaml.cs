@@ -181,10 +181,8 @@ namespace HexView
 				return;
 			}
 
-			using (var oldSource = Model.Buffer)
-			{
-				Model.Buffer = newSource;
-			}
+			using var oldSource = Model.Buffer;
+			Model.Buffer = newSource;
 		}
 
 		void CloseFile()
