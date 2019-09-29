@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
-using HexView.Framework;
+using Range = HexView.Framework.Range;
 
 namespace HexView
 {
