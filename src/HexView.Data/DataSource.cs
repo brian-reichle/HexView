@@ -41,7 +41,7 @@ namespace HexView.Data
 		public abstract long ByteCount { get; }
 
 		public abstract T Read<T>(long offset)
-			where T : struct;
+			where T : unmanaged;
 
 		public abstract string ReadText(long offset, int length, Encoding encoding);
 

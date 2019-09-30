@@ -7,7 +7,7 @@ namespace HexView.Framework
 	{
 		long ByteCount { get; }
 		T Read<T>(long offset)
-			where T : struct;
+			where T : unmanaged;
 		string ReadText(long offset, int length, Encoding encoding);
 	}
 }

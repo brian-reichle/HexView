@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace HexView.Framework
 {
 	sealed class SimpleNodeTemplate<T> : IStructuralNodeTemplate
-		where T : struct
+		where T : unmanaged
 	{
 		public SimpleNodeTemplate()
 		{
