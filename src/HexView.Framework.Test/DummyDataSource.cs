@@ -15,10 +15,9 @@ namespace HexView.Framework.Test
 
 		public long ByteCount { get; }
 
-		public T Read<T>(long offset)
-			where T : unmanaged
+		public void CopyTo(long offset, Span<byte> buffer)
 		{
-			return Ref<T>(GetBytes((int)offset, Unsafe.SizeOf<T>()));
+			GetBytes(offset, buffer.Length).AsSpan().CopyTo(buffer);
 		}
 
 		public void Set<T>(long offset, T value)

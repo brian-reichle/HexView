@@ -14,11 +14,11 @@ namespace HexView.Data.Test
 		}
 
 		[Test]
-		public void ReadValue()
+		public void CopyTo()
 		{
-			Assert.That(_dataSource.Read<byte>(16), Is.EqualTo(16));
-			Assert.That(_dataSource.Read<ushort>(16), Is.EqualTo(0x1110));
-			Assert.That(_dataSource.Read<int>(16), Is.EqualTo(0x13121110));
+			var data = new byte[4];
+			_dataSource.CopyTo(16, data);
+			Assert.That(data, Is.EqualTo(new[] { 0x10, 0x11, 0x12, 0x13 }));
 		}
 
 		[Test]
