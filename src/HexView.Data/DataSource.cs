@@ -1,5 +1,6 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
+using System.Buffers;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Text;
@@ -40,8 +41,7 @@ namespace HexView.Data
 
 		public abstract long ByteCount { get; }
 
-		public abstract T Read<T>(long offset)
-			where T : struct;
+		public abstract void CopyTo(long offset, Span<byte> buffer);
 
 		public abstract string ReadText(long offset, int length, Encoding encoding);
 

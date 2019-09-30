@@ -1,4 +1,5 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
+using System;
 using System.Buffers;
 using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
@@ -17,12 +18,6 @@ namespace HexView.Data
 
 		public override long ByteCount { get; }
 
-		public override T Read<T>(long offset)
-		{
-			_accessor.Read<T>(offset, out var result);
-			return result;
-		}
-
 		public override string ReadText(long offset, int length, Encoding encoding)
 		{
 			var buffer = ArrayPool<byte>.Shared.Rent(length);
@@ -30,6 +25,11 @@ namespace HexView.Data
 			var result = encoding.GetString(buffer, 0, length);
 			ArrayPool<byte>.Shared.Return(buffer);
 			return result;
+		}
+
+		public override void CopyTo(long offset, Span<byte> buffer)
+		{
+			_accessor.SafeMemoryMappedViewHandle.AsSpan().Slice((int)offset, buffer.Length).CopyTo(buffer);
 		}
 
 		protected override void Dispose(bool isDisposing)

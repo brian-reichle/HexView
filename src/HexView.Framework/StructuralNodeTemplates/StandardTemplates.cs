@@ -22,12 +22,8 @@ namespace HexView.Framework
 		public static readonly IStructuralNodeTemplate Guid = new SimpleNodeTemplate<Guid>();
 
 		public static IStructuralNodeTemplate Enum<T>()
-			where T : struct
-		{
-			if (!typeof(T).IsEnum) return null;
-
-			return new SimpleNodeTemplate<T>();
-		}
+			where T : unmanaged, Enum
+			=> new SimpleNodeTemplate<T>();
 
 		public static IStructuralNodeTemplate Text(int width, Encoding encoding) => new TextNodeTemplate(width, encoding);
 		public static IStructuralNodeTemplate Blob(long width) => new BlobNodeTemplate(width);

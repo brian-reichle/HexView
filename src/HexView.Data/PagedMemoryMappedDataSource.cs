@@ -24,12 +24,22 @@ namespace HexView.Data
 
 		public override long ByteCount => _length;
 
-		public override T Read<T>(long offset)
+		public override void CopyTo(long offset, Span<byte> buffer)
 		{
-			var accessor = GetAccessor(offset);
+			while (buffer.Length > 0)
+			{
+				var accessor = GetAccessor(offset);
+				var span = accessor.SafeMemoryMappedViewHandle.AsSpan().Slice((int)(offset & AccessorOffsetMask));
 
-			accessor.Read<T>(offset & AccessorOffsetMask, out var result);
-			return result;
+				if (span.Length >= buffer.Length)
+				{
+					span = span.Slice(0, buffer.Length);
+				}
+
+				span.CopyTo(buffer);
+				buffer = buffer.Slice(span.Length);
+				offset += span.Length;
+			}
 		}
 
 		public override string ReadText(long offset, int length, Encoding encoding)

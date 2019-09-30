@@ -381,9 +381,12 @@ namespace HexView
 			var charIndex1 = CharLayout.ByteSectionIndex;
 			var charIndex2 = charIndex1 + (length << 1);
 
+			Span<byte> buffer = stackalloc byte[length];
+			block.CopyTo(start, buffer);
+
 			for (var i = 0; i < length; i++)
 			{
-				var b = block.Read<byte>(start + i);
+				var b = buffer[i];
 				chars[charIndex1++] = HexHelper.HexChars[b >> 4];
 				chars[charIndex1++] = HexHelper.HexChars[b & 0x0F];
 				chars[charIndex2++] = b < 32 || b >= 127 ? '.' : (char)b;

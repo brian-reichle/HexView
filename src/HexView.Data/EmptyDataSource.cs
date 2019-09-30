@@ -14,8 +14,9 @@ namespace HexView.Data
 
 		public override long ByteCount => 0;
 
-		public override T Read<T>(long offset)
-			=> throw new ArgumentOutOfRangeException(nameof(offset));
+		public override void CopyTo(long offset, Span<byte> buffer)
+		{
+		}
 
 		public override string ReadText(long offset, int length, Encoding encoding)
 			=> throw new ArgumentOutOfRangeException(nameof(offset));

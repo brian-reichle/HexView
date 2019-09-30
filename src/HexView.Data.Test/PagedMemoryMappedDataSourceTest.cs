@@ -15,18 +15,19 @@ namespace HexView.Data.Test
 		}
 
 		[Test]
-		public void ReadValue()
+		public void CopyTo()
 		{
-			Assert.That(_dataSource.Read<byte>(16), Is.EqualTo(16));
-			Assert.That(_dataSource.Read<ushort>(16), Is.EqualTo(0x1110));
-			Assert.That(_dataSource.Read<int>(16), Is.EqualTo(0x13121110));
+			var data = new byte[4];
+			_dataSource.CopyTo(16, data);
+			Assert.That(data, Is.EqualTo(new[] { 0x10, 0x11, 0x12, 0x13 }));
 		}
 
 		[Test]
-		[Ignore("Doesn't work yet.")]
-		public void ReadValueAcrossPages()
+		public void CopyToAcrossPages()
 		{
-			Assert.That(_dataSource.Read<long>(0x10000 - 4), Is.EqualTo(0x03020100FFFEFDFC));
+			var data = new byte[4];
+			_dataSource.CopyTo(0x10000 - 2, data);
+			Assert.That(data, Is.EqualTo(new[] { 0xFE, 0xFF, 0x00, 0x01 }));
 		}
 
 		[Test]
