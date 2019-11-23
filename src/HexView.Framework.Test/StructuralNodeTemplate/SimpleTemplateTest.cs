@@ -18,7 +18,7 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 		public void Components()
 		{
 			var template = new SimpleNodeTemplate<int>();
-			Assert.That(template.Components, Is.Null);
+			Assert.That(template.Components, Is.Empty);
 		}
 
 		[Test]

@@ -57,27 +57,6 @@ namespace HexView.Framework.Test
 		}
 
 		[Test]
-		public void ChildrenNull()
-		{
-			var mockData = new Mock<IDataSource>(MockBehavior.Strict);
-
-			var mockTemplate = new Mock<IStructuralNodeTemplate>(MockBehavior.Strict);
-			mockTemplate.Setup(x => x.Width).Returns(10);
-			mockTemplate.Setup(x => x.Components).Returns((IReadOnlyList<Component>)null);
-
-			var node = new TemplatedStructuralNode(
-				mockData.Object,
-				null,
-				"<name>",
-				mockTemplate.Object,
-				100);
-
-			Assert.That(node.ByteRange.Offset, Is.EqualTo(100));
-			Assert.That(node.ByteRange.Length, Is.EqualTo(10));
-			Assert.That(node.Children.Count, Is.EqualTo(0));
-		}
-
-		[Test]
 		public void Value()
 		{
 			var mockData = new Mock<IDataSource>(MockBehavior.Strict);

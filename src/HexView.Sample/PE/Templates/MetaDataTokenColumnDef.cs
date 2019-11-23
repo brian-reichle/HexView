@@ -1,4 +1,5 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
+using System;
 using System.Collections.Generic;
 using HexView.Framework;
 
@@ -37,7 +38,7 @@ namespace HexView.Plugins.Sample.PE
 
 			long IStructuralNodeTemplate.Width => 4;
 			object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<int>(offset));
-			IReadOnlyList<Component> IStructuralNodeTemplate.Components => null;
+			IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
 
 			readonly MetaDataTokenColumnDef _def;
 		}
@@ -48,7 +49,7 @@ namespace HexView.Plugins.Sample.PE
 
 			long IStructuralNodeTemplate.Width => 2;
 			object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<ushort>(offset));
-			IReadOnlyList<Component> IStructuralNodeTemplate.Components => null;
+			IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
 
 			readonly MetaDataTokenColumnDef _def;
 		}

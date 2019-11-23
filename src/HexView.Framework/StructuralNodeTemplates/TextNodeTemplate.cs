@@ -17,7 +17,7 @@ namespace HexView.Framework
 		}
 
 		public long Width => _width;
-		public IReadOnlyList<Component> Components => null;
+		public IReadOnlyList<Component> Components => Array.Empty<Component>();
 		public object GetValue(IDataSource data, long offset) => data.ReadText(offset, _width, _encoding);
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
