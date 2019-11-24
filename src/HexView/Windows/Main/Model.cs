@@ -15,7 +15,7 @@ namespace HexView
 			set
 			{
 				_buffer = value;
-				_reader = null;
+				_reader = NullFormatReader.Instance;
 				Provider = null;
 				OnPropertyChanged(nameof(Buffer));
 				OnPropertyChanged(nameof(Reader));
@@ -32,16 +32,7 @@ namespace HexView
 				if (_reader != value)
 				{
 					_reader = value;
-
-					if (_reader != null && _buffer != null)
-					{
-						Provider = _reader.Read(_buffer);
-					}
-					else
-					{
-						Provider = null;
-					}
-
+					Provider = _reader.Read(_buffer);
 					OnPropertyChanged(nameof(Reader));
 					OnPropertyChanged(nameof(Provider));
 				}
@@ -56,7 +47,7 @@ namespace HexView
 			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		DataSource _buffer;
+		DataSource _buffer = DataSource.Empty;
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		IFormatReader _reader = NullFormatReader.Instance;
 	}
