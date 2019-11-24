@@ -1,6 +1,5 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
-using System.Buffers;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Text;
@@ -10,6 +9,8 @@ namespace HexView.Data
 {
 	public abstract class DataSource : IDataSource, IDisposable
 	{
+		public static DataSource Empty => EmptyDataSource.Instance;
+
 		public static DataSource Load(string filename)
 		{
 			const MemoryMappedFileAccess access = MemoryMappedFileAccess.Read;

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using HexView.Data;
 using HexView.Framework;
 
 namespace HexView
