@@ -6,7 +6,7 @@ namespace HexView.Framework
 	public interface IStructuralNodeTemplate
 	{
 		long Width { get; }
-		object GetValue(IDataSource data, long offset);
+		object? GetValue(IDataSource data, long offset);
 
 		IReadOnlyList<Component> Components { get; }
 	}

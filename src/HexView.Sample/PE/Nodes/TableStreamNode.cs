@@ -62,7 +62,7 @@ namespace HexView.Plugins.Sample.PE
 			return tables;
 		}
 
-		static IStructuralNodeTemplate CreateRowTemplate(MetaDataTableStatistics statistics, MetaDataTableCodes code)
+		static IStructuralNodeTemplate? CreateRowTemplate(MetaDataTableStatistics statistics, MetaDataTableCodes code)
 		{
 			return code switch
 			{

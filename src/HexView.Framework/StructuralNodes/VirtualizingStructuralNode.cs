@@ -8,16 +8,16 @@ namespace HexView.Framework
 {
 	public abstract class VirtualizingStructuralNode : IStructuralNode, IList<IStructuralNode>, IList, IReadOnlyList<IStructuralNode>
 	{
-		protected VirtualizingStructuralNode(IStructuralNode parent)
+		protected VirtualizingStructuralNode(IStructuralNode? parent)
 		{
 			Parent = parent;
 		}
 
-		public IStructuralNode Parent { get; }
+		public IStructuralNode? Parent { get; }
 		public abstract string Name { get; }
-		public abstract Range ByteRange { get; }
+		public abstract Range? ByteRange { get; }
 		protected abstract int Count { get; }
-		public virtual object Value => null;
+		public virtual object? Value => null;
 		public IReadOnlyList<IStructuralNode> Children => this;
 
 		protected abstract IStructuralNode CreateChildNode(int index);

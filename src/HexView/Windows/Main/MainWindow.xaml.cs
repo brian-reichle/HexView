@@ -138,7 +138,7 @@ namespace HexView
 			{
 				e.Handled = true;
 
-				var node = (IStructuralNode)e.Parameter;
+				var node = (IStructuralNode?)e.Parameter;
 				var window = (MainWindow)sender;
 				window.SelectRange(node?.ByteRange);
 			}
@@ -194,7 +194,7 @@ namespace HexView
 			{
 				try
 				{
-					Model.Buffer = null;
+					Model.Buffer = DataSource.Empty;
 				}
 				finally
 				{
@@ -203,7 +203,7 @@ namespace HexView
 			}
 		}
 
-		void SelectRange(Range range)
+		void SelectRange(Range? range)
 		{
 			if (range == null)
 			{

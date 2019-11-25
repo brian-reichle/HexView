@@ -56,7 +56,7 @@ namespace HexView.Data.Test
 
 		static DataSource CreateDataSource()
 		{
-			MemoryMappedFile file = null;
+			MemoryMappedFile? file = null;
 
 			try
 			{
@@ -73,6 +73,8 @@ namespace HexView.Data.Test
 		}
 
 		const int Length = 0x20000; // 2 pages.
+#nullable disable
 		DataSource _dataSource;
+#nullable restore
 	}
 }

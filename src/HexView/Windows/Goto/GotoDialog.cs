@@ -47,7 +47,7 @@ namespace HexView
 
 		#region IDataErrorInfo Members
 
-		string IDataErrorInfo.Error => null;
+		string IDataErrorInfo.Error => string.Empty;
 
 		string IDataErrorInfo.this[string columnName]
 		{
@@ -63,17 +63,17 @@ namespace HexView
 						break;
 				}
 
-				return null;
+				return string.Empty;
 			}
 		}
 
 		#endregion
 
-		void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		void OnPropertyChanged([CallerMemberName] string propertyName = null!)
 			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 		long _offset;
 		long _maxOffset;
-		event PropertyChangedEventHandler PropertyChanged;
+		event PropertyChangedEventHandler? PropertyChanged;
 	}
 }

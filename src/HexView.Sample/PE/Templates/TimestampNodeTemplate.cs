@@ -15,9 +15,9 @@ namespace HexView.Plugins.Sample.PE
 		}
 
 		public long Width => 4;
-		public IReadOnlyList<Component> Components => null;
+		public IReadOnlyList<Component> Components => Array.Empty<Component>();
 
-		public object GetValue(IDataSource data, long offset)
+		public object? GetValue(IDataSource data, long offset)
 		{
 			var value = data.Read<uint>(offset);
 			return value == 0 ? null : (object)Epoch.AddSeconds(value);

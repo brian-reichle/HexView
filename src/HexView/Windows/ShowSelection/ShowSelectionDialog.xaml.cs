@@ -46,7 +46,7 @@ namespace HexView
 
 		void Generate()
 		{
-			Encoding encoding;
+			Encoding? encoding;
 
 			if (_source == null)
 			{
@@ -60,7 +60,7 @@ namespace HexView
 			{
 				SetErrorText("Empty Selection.");
 			}
-			else if ((encoding = ((EncodingInfo)EncodingDropDown.SelectedItem)?.GetEncoding()) == null)
+			else if ((encoding = ((EncodingInfo?)EncodingDropDown.SelectedItem)?.GetEncoding()) == null)
 			{
 				SetErrorText("Invalid encoding.");
 			}
@@ -71,7 +71,7 @@ namespace HexView
 			}
 		}
 
-		void SetErrorText(string text)
+		void SetErrorText(string? text)
 		{
 			if (string.IsNullOrEmpty(text))
 			{

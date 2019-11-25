@@ -17,7 +17,7 @@ namespace HexView.Framework
 		}
 
 		public long Width { get; private set; }
-		public object GetValue(IDataSource data, long offset) => null;
+		public object? GetValue(IDataSource data, long offset) => null;
 		public IReadOnlyList<Component> Components => _components;
 		public void OverrideWidth(int width) => Width = width;
 

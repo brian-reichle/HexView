@@ -39,9 +39,9 @@ namespace HexView
 			}
 		}
 
-		public IStructuralNodeProvider Provider { get; private set; }
+		public IStructuralNodeProvider? Provider { get; private set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		void OnPropertyChanged(string name)
 			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

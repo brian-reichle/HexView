@@ -7,7 +7,7 @@ namespace HexView.Data.Test
 	{
 		public static MemoryMappedFile CreatePatterenedMap(int size)
 		{
-			MemoryMappedFile file = null;
+			MemoryMappedFile? file = null;
 
 			try
 			{

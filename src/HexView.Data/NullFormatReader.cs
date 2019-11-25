@@ -12,6 +12,6 @@ namespace HexView.Data
 		}
 
 		public string Name => string.Empty;
-		IStructuralNodeProvider IFormatReader.Read(IDataSource data) => null;
+		IStructuralNodeProvider? IFormatReader.Read(IDataSource data) => null;
 	}
 }

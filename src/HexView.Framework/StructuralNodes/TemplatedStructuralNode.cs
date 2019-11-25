@@ -5,7 +5,7 @@ namespace HexView.Framework
 {
 	public sealed class TemplatedStructuralNode : VirtualizingStructuralNode
 	{
-		public TemplatedStructuralNode(IDataSource data, IStructuralNode parent, string name, IStructuralNodeTemplate template, long offset)
+		public TemplatedStructuralNode(IDataSource data, IStructuralNode? parent, string name, IStructuralNodeTemplate template, long offset)
 			: base(parent)
 		{
 			if (data == null) throw new ArgumentNullException(nameof(data));
@@ -19,8 +19,8 @@ namespace HexView.Framework
 
 		public override string Name { get; }
 		public override Range ByteRange => new Range(_offset, _template.Width);
-		protected override int Count => _template.Components == null ? 0 : _template.Components.Count;
-		public override object Value => _template.GetValue(_data, _offset);
+		protected override int Count => _template.Components.Count;
+		public override object? Value => _template.GetValue(_data, _offset);
 
 		protected override IStructuralNode CreateChildNode(int index)
 		{

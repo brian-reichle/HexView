@@ -86,8 +86,8 @@ namespace HexView.Plugins.Sample.PE
 			};
 		}
 
-		string _name;
-		Range _byteRange;
+		string? _name;
+		Range? _byteRange;
 		readonly PEStructuralNodeProvider _provider;
 		readonly long _tableReccordOffset;
 	}

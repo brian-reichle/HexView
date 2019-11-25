@@ -64,6 +64,6 @@ namespace HexView.Plugins.Sample.PE
 		readonly long _offset;
 		readonly int _depth;
 		readonly PEStructuralNodeProvider _provider;
-		Range _range;
+		Range? _range;
 	}
 }

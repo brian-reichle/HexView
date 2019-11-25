@@ -5,7 +5,7 @@ namespace HexView.Framework
 {
 	public sealed class NotificationNode : VirtualizingStructuralNode
 	{
-		public NotificationNode(IDataSource data, IStructuralNode parent, IReadOnlyList<Notification> notifications)
+		public NotificationNode(IDataSource data, IStructuralNode? parent, IReadOnlyList<Notification> notifications)
 			: base(parent)
 		{
 			_data = data;
@@ -13,7 +13,7 @@ namespace HexView.Framework
 		}
 
 		public override string Name => "Notifications";
-		public override Range ByteRange => null;
+		public override Range? ByteRange => null;
 		protected override int Count => _notifications.Count;
 
 		protected override IStructuralNode CreateChildNode(int index)
