@@ -69,7 +69,7 @@ namespace HexView.Framework.Test
 
 		sealed class Dummy : VirtualizingStructuralNode
 		{
-			public Dummy(IStructuralNode parent, string name, Range byteRange, int count, Func<int, IStructuralNode> factory)
+			public Dummy(IStructuralNode? parent, string name, Range byteRange, int count, Func<int, IStructuralNode> factory)
 				: base(parent)
 			{
 				Name = name;

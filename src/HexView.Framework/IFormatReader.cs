@@ -4,6 +4,6 @@ namespace HexView.Framework
 	public interface IFormatReader
 	{
 		string Name { get; }
-		IStructuralNodeProvider Read(IDataSource data);
+		IStructuralNodeProvider? Read(IDataSource data);
 	}
 }

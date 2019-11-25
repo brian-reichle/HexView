@@ -6,14 +6,14 @@ namespace HexView.Plugins.Sample.PE
 {
 	sealed class PESectionList : LazyStructuralNode
 	{
-		public PESectionList(PEStructuralNodeProvider provider, IStructuralNode parent)
+		public PESectionList(PEStructuralNodeProvider provider, IStructuralNode? parent)
 			: base(parent)
 		{
 			_provider = provider;
 		}
 
 		public override string Name => "Sections";
-		public override Range ByteRange => null;
+		public override Range? ByteRange => null;
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{

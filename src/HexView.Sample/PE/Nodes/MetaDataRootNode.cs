@@ -7,7 +7,7 @@ namespace HexView.Plugins.Sample.PE
 {
 	sealed class MetaDataRootNode : LazyStructuralNode
 	{
-		public MetaDataRootNode(PEStructuralNodeProvider provider, IStructuralNode parent, int length)
+		public MetaDataRootNode(PEStructuralNodeProvider provider, IStructuralNode? parent, int length)
 			: base(parent)
 		{
 			_provider = provider;

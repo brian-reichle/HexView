@@ -5,11 +5,11 @@ namespace HexView.Framework
 {
 	public interface IStructuralNode
 	{
-		IStructuralNode Parent { get; }
+		IStructuralNode? Parent { get; }
 		IReadOnlyList<IStructuralNode> Children { get; }
 
 		string Name { get; }
-		Range ByteRange { get; }
-		object Value { get; }
+		Range? ByteRange { get; }
+		object? Value { get; }
 	}
 }

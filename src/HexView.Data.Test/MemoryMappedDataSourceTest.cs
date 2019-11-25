@@ -46,6 +46,8 @@ namespace HexView.Data.Test
 		}
 
 		const int Length = 0x100;
+#nullable disable
 		DataSource _dataSource;
+#nullable restore
 	}
 }

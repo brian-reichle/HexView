@@ -248,7 +248,7 @@ namespace HexView.Plugins.Sample.PE
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		readonly Level _level;
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		List<Notification> _notifications;
-		IReadOnlyList<KeyValuePair<string, int>> _streamHeaderOffsets;
+		List<Notification>? _notifications;
+		IReadOnlyList<KeyValuePair<string, int>>? _streamHeaderOffsets;
 	}
 }

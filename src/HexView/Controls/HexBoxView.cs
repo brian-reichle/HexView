@@ -78,7 +78,7 @@ namespace HexView
 			return new Point(x, y);
 		}
 
-		public Range RangeFromDrag(Point fromExtentPoint, Point toExtentPoint)
+		public Range? RangeFromDrag(Point fromExtentPoint, Point toExtentPoint)
 		{
 			return _layout?.RangeFromDrag(fromExtentPoint, toExtentPoint);
 		}
@@ -287,7 +287,7 @@ namespace HexView
 		public void PageUp() => SetVerticalOffset(_verticalOffset - _viewportHeight * 0.9);
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		ScrollViewer IScrollInfo.ScrollOwner
+		ScrollViewer? IScrollInfo.ScrollOwner
 		{
 			[DebuggerStepThrough]
 			get => _owner;
@@ -335,6 +335,9 @@ namespace HexView
 
 		LineSet GetLines(long startingLine, int count)
 		{
+			Debug.Assert(_layout != null, "We should not have reached this point if _layout is null.");
+			Debug.Assert(_charSet != null, "We should not have reached this point if _charSet is null.");
+
 			var lines = _lineSet;
 
 			if (lines == null || lines.StartingLine != startingLine || lines.Runs.Length < count)
@@ -347,6 +350,9 @@ namespace HexView
 
 		LineSet CalculateLines(long startingLine, int count)
 		{
+			Debug.Assert(_layout != null, "We should not have reached this point if _layout is null.");
+			Debug.Assert(_charSet != null, "We should not have reached this point if _charSet is null.");
+
 			var blob = _parent.Data;
 
 			if (blob == null || count == 0)
@@ -368,6 +374,9 @@ namespace HexView
 
 		GlyphRun CreateRun(Point point, IDataSource block, long start)
 		{
+			Debug.Assert(_layout != null, "We should not have reached this point if _layout is null.");
+			Debug.Assert(_charSet != null, "We should not have reached this point if _charSet is null.");
+
 			var length = (int)(Math.Min(block.ByteCount, start + 16) - start);
 			var chars = new char[CharLayout.ByteSectionIndex + (length * 3)];
 			var tmp = start;
@@ -526,10 +535,10 @@ namespace HexView
 		double _viewportWidth;
 		bool _canVerticallyScroll;
 		bool _canHorizontallyScroll;
-		HexCharSet _charSet;
-		CharLayout _layout;
-		ScrollViewer _owner;
-		LineSet _lineSet;
+		HexCharSet? _charSet;
+		CharLayout? _layout;
+		ScrollViewer? _owner;
+		LineSet? _lineSet;
 
 		sealed class LineSet
 		{

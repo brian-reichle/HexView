@@ -10,7 +10,7 @@ namespace HexView
 	{
 		public static HexConverter Default { get; } = new HexConverter();
 
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var longValue = (long?)value;
 
@@ -22,13 +22,11 @@ namespace HexView
 			return null;
 		}
 
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		public object? ConvertBack(object? value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var strValue = (string)value;
-
-			if (strValue != null)
+			if (value != null)
 			{
-				return HexHelper.Parse(strValue);
+				return HexHelper.Parse((string)value);
 			}
 
 			return null;

@@ -13,7 +13,7 @@ namespace HexView.Plugins.Sample.PE
 		}
 
 		public override string Name => "Stream Headers";
-		public override Range ByteRange => null;
+		public override Range? ByteRange => null;
 		protected override int Count => _provider.StreamHeaderOffsets.Count;
 
 		protected override IStructuralNode CreateChildNode(int index)

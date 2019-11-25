@@ -1,5 +1,6 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -190,7 +191,7 @@ namespace HexView
 
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			if (!e.Handled && IsMouseCaptured)
+			if (!e.Handled && IsMouseCaptured && _view != null)
 			{
 				e.Handled = true;
 
@@ -286,6 +287,8 @@ namespace HexView
 
 		void SelectByDrag(Point fromPoint, Point toPoint)
 		{
+			Debug.Assert(_view != null, "We should not have reached this point if _view is null.");
+
 			var blob = Data;
 
 			if (blob == null || blob.ByteCount == 0)
@@ -312,7 +315,7 @@ namespace HexView
 			Select(selectFrom, selectTo - selectFrom + 1);
 		}
 
-		void AutoScrollTick(object sender, EventArgs e)
+		void AutoScrollTick(object? sender, EventArgs e)
 		{
 			if (!IsMouseCaptured || _view == null)
 			{
@@ -374,7 +377,7 @@ namespace HexView
 			return keyboard == null ? ModifierKeys.None : keyboard.Modifiers;
 		}
 
-		HexBoxView _view;
+		HexBoxView? _view;
 		Point _dragFrom;
 		readonly DispatcherTimer _autoScrollTick;
 	}

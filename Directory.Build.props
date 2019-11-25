@@ -15,8 +15,9 @@ CS1030 - #warning
 CS1591 - Missing XML comment.
     -->
     <WarningsNotAsErrors>618,1030,1701,1702</WarningsNotAsErrors>
-    <LangVersion>8.0</LangVersion>
     <NoWarn>1591</NoWarn>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <Copyright>Copyright © Brian Reichle 2013-2019</Copyright>

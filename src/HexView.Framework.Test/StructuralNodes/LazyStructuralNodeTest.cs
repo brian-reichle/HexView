@@ -32,7 +32,7 @@ namespace HexView.Framework.Test
 				null,
 				"<name>",
 				new Range(100, 50),
-				() => null);
+				() => null!);
 
 			Assert.That(node.Children, Is.SameAs(Array.Empty<IStructuralNode>()));
 		}
@@ -75,7 +75,7 @@ namespace HexView.Framework.Test
 
 		sealed class Dummy : LazyStructuralNode
 		{
-			public Dummy(IStructuralNode parent, string name, Range byteRange, Func<IList<IStructuralNode>> childFactory)
+			public Dummy(IStructuralNode? parent, string name, Range byteRange, Func<IList<IStructuralNode>> childFactory)
 				: base(parent)
 			{
 				Name = name;

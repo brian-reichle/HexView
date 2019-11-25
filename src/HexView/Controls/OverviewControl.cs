@@ -142,7 +142,7 @@ namespace HexView
 			drawingContext.Pop();
 		}
 
-		static Geometry CreateSelectionGeometryFromByteRange(long start, long end)
+		static Geometry? CreateSelectionGeometryFromByteRange(long start, long end)
 		{
 			var firstLine = start >> 4;
 			var lastLine = end >> 4;
@@ -152,9 +152,9 @@ namespace HexView
 				return new RectangleGeometry(CreateSelectionRectangleFromCells(firstLine, start & 0xF, lastLine, end & 0xF));
 			}
 
-			Geometry lead;
-			Geometry body;
-			Geometry trail;
+			Geometry? lead;
+			Geometry? body;
+			Geometry? trail;
 
 			if ((start & 0xF) == 0)
 			{
@@ -220,7 +220,7 @@ namespace HexView
 			control._dirtySelectionGeomertry = true;
 		}
 
-		Geometry DataGeometry
+		Geometry? DataGeometry
 		{
 			get
 			{
@@ -235,7 +235,7 @@ namespace HexView
 			}
 		}
 
-		Geometry SelectionGeometry
+		Geometry? SelectionGeometry
 		{
 			get
 			{
@@ -261,9 +261,9 @@ namespace HexView
 			}
 		}
 
-		Transform _renderTransform;
-		Geometry _dataGeometry;
-		Geometry _selectionGeometry;
+		Transform? _renderTransform;
+		Geometry? _dataGeometry;
+		Geometry? _selectionGeometry;
 		bool _dirtyDataGeometry;
 		bool _dirtySelectionGeomertry;
 	}

@@ -8,15 +8,15 @@ namespace HexView.Framework
 {
 	public abstract class LazyStructuralNode : IStructuralNode
 	{
-		protected LazyStructuralNode(IStructuralNode parent)
+		protected LazyStructuralNode(IStructuralNode? parent)
 		{
 			Parent = parent;
 		}
 
 		public abstract string Name { get; }
-		public abstract Range ByteRange { get; }
-		public IStructuralNode Parent { get; }
-		public virtual object Value => null;
+		public abstract Range? ByteRange { get; }
+		public IStructuralNode? Parent { get; }
+		public virtual object? Value => null;
 
 		public IReadOnlyList<IStructuralNode> Children
 		{
@@ -43,6 +43,6 @@ namespace HexView.Framework
 		protected abstract IList<IStructuralNode> CreateChildNodes();
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		IReadOnlyList<IStructuralNode> _children;
+		IReadOnlyList<IStructuralNode>? _children;
 	}
 }

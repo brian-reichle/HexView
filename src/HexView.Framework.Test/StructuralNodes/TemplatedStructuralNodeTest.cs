@@ -30,8 +30,8 @@ namespace HexView.Framework.Test
 			var node = new TemplatedStructuralNode(mockData.Object, null, "root", mockTemplate.Object, 100);
 
 			Assert.That(node.Children.Select(x => x.Name), Is.EqualTo(new[] { "A", "B", "C" }));
-			Assert.That(node.Children.Select(x => x.ByteRange.Offset), Is.EqualTo(new[] { 100, 104, 108 }));
-			Assert.That(node.Children.Select(x => x.ByteRange.Length), Has.All.EqualTo(4));
+			Assert.That(node.Children.Select(x => x.ByteRange!.Offset), Is.EqualTo(new[] { 100, 104, 108 }));
+			Assert.That(node.Children.Select(x => x.ByteRange!.Length), Has.All.EqualTo(4));
 			Assert.That(node.Children.Select(x => x.Parent), Has.All.EqualTo(node));
 		}
 

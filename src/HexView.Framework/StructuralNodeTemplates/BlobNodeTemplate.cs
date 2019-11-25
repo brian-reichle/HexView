@@ -12,7 +12,7 @@ namespace HexView.Framework
 		}
 
 		public long Width { get; }
-		public object GetValue(IDataSource data, long offset) => null;
+		public object? GetValue(IDataSource data, long offset) => null;
 		public IReadOnlyList<Component> Components => Array.Empty<Component>();
 	}
 }

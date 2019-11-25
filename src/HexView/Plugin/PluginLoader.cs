@@ -40,13 +40,13 @@ namespace HexView
 			}
 		}
 
-		static string GetPluginDirectory()
+		static string? GetPluginDirectory()
 		{
 			var assembly = Assembly.GetExecutingAssembly();
-			var uri = new Uri(assembly.CodeBase);
+			var uri = new Uri(assembly.CodeBase!);
 			if (!uri.IsFile) return null;
 
-			var pluginDirectory = Path.Combine(Path.GetDirectoryName(uri.LocalPath), "Plugins");
+			var pluginDirectory = Path.Combine(Path.GetDirectoryName(uri.LocalPath)!, "Plugins");
 
 			if (!Directory.Exists(pluginDirectory))
 			{
@@ -56,7 +56,7 @@ namespace HexView
 			return pluginDirectory;
 		}
 
-		static IPlugin Load(string filename)
+		static IPlugin? Load(string filename)
 		{
 			Assembly ass;
 
@@ -79,9 +79,9 @@ namespace HexView
 			return (IPlugin)constructor.Invoke(null);
 		}
 
-		static ConstructorInfo GetPluginType(Assembly assembly)
+		static ConstructorInfo? GetPluginType(Assembly assembly)
 		{
-			var att = (PluginAttribute)Attribute.GetCustomAttribute(assembly, typeof(PluginAttribute));
+			var att = (PluginAttribute?)Attribute.GetCustomAttribute(assembly, typeof(PluginAttribute));
 
 			if (att == null) return null;
 

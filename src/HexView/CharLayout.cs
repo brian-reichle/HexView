@@ -43,7 +43,7 @@ namespace HexView
 		public IList<double> GetSpacing(int bytes)
 			=> bytes == 16 ? _full : new CellSpacing(bytes, _columnPositions);
 
-		public Geometry CreateSelectionGeometryFromByteRange(long start, long end, HexBoxDisplaySection section)
+		public Geometry? CreateSelectionGeometryFromByteRange(long start, long end, HexBoxDisplaySection section)
 		{
 			var firstLine = start >> 4;
 			var lastLine = end >> 4;
@@ -53,9 +53,9 @@ namespace HexView
 				return new RectangleGeometry(CreateSelectionRectangleFromCells(firstLine, start & 0xF, lastLine, end & 0xF, section));
 			}
 
-			Geometry lead;
-			Geometry body;
-			Geometry trail;
+			Geometry? lead;
+			Geometry? body;
+			Geometry? trail;
 
 			if ((start & 0xF) == 0)
 			{
@@ -121,7 +121,7 @@ namespace HexView
 			return CreateSelectionRectangleFromCells(firstRow, firstColumn, lastRow, lastColumn, section);
 		}
 
-		public Range RangeFromDrag(Point fromPoint, Point toPoint)
+		public Range? RangeFromDrag(Point fromPoint, Point toPoint)
 		{
 			var category = CategoriseDrag(fromPoint.X, toPoint.X);
 

@@ -93,6 +93,6 @@ namespace HexView.Plugins.Sample.PE
 		readonly long _resourceBase;
 		readonly long _offset;
 		readonly int _depth;
-		string _name;
+		string? _name;
 	}
 }

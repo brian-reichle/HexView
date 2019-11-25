@@ -1,4 +1,5 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using HexView.Data;
 
@@ -21,7 +22,7 @@ namespace HexView
 			base.OnStartup(e);
 		}
 
-		static bool TryGetFirstArgument(StartupEventArgs e, out string arg)
+		static bool TryGetFirstArgument(StartupEventArgs e, [NotNullWhen(true)] out string? arg)
 		{
 			string result;
 

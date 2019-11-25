@@ -7,8 +7,8 @@ namespace HexView.Plugins.Sample.PE
 {
 	abstract class MetaDataTokenColumnDef
 	{
-		public IStructuralNodeTemplate ShortForm => _shortForm ?? (_shortForm = new ShortFormTemplate(this));
-		public IStructuralNodeTemplate LongForm => _longForm ?? (_longForm = new LongFormTemplate(this));
+		public IStructuralNodeTemplate ShortForm => _shortForm ??= new ShortFormTemplate(this);
+		public IStructuralNodeTemplate LongForm => _longForm ??= new LongFormTemplate(this);
 
 		public abstract IStructuralNodeTemplate SelectTemplate(MetaDataTableStatistics statistics);
 		protected abstract int Decode(int rawValue);
@@ -29,8 +29,8 @@ namespace HexView.Plugins.Sample.PE
 			return count;
 		}
 
-		IStructuralNodeTemplate _shortForm;
-		IStructuralNodeTemplate _longForm;
+		IStructuralNodeTemplate? _shortForm;
+		IStructuralNodeTemplate? _longForm;
 
 		sealed class LongFormTemplate : IStructuralNodeTemplate
 		{
