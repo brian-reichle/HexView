@@ -141,14 +141,14 @@ namespace HexView
 
 		static void AppendStringValue(StringBuilder builder, string value)
 		{
-			builder.Append("\"");
+			builder.Append('"');
 
 			for (var i = 0; i < value.Length; i++)
 			{
 				AppendChar(builder, value[i], true);
 			}
 
-			builder.Append("\"");
+			builder.Append('"');
 		}
 
 		static void AppendChar(StringBuilder builder, char value, bool stringChar)

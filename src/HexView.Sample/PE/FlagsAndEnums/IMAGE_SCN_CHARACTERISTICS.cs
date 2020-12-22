@@ -1,6 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
 
+#pragma warning disable CA1069 // Enums values should not be duplicated
 namespace HexView.Plugins.Sample.PE
 {
 	[Flags]
@@ -54,3 +55,4 @@ namespace HexView.Plugins.Sample.PE
 		IMAGE_SCN_MEM_WRITE = 0x80000000,
 	}
 }
+#pragma warning restore CA1069 // Enums values should not be duplicated
