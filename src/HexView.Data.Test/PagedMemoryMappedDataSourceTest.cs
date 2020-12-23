@@ -60,9 +60,7 @@ namespace HexView.Data.Test
 
 			try
 			{
-#pragma warning disable CA2000 // Dispose objects before losing scope
 				file = MapFactory.CreatePatterenedMap(Length);
-#pragma warning restore CA2000 // Dispose objects before losing scope
 				return new PagedMemoryMappedDataSource(file, Length);
 			}
 			catch

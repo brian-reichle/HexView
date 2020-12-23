@@ -18,6 +18,7 @@ CS1591 - Missing XML comment.
     <NoWarn>1591</NoWarn>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
   <PropertyGroup>
     <Copyright>Copyright © Brian Reichle 2013-2019</Copyright>
