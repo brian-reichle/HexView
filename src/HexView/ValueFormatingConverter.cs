@@ -135,7 +135,7 @@ namespace HexView
 			builder.Append("0x");
 			builder.Append(((int)value).ToString("X4", CultureInfo.InvariantCulture));
 			builder.Append(": '");
-			AppendChar(builder, value, false);
+			AppendChar(builder, value, stringChar: false);
 			builder.Append('\'');
 		}
 
@@ -145,7 +145,7 @@ namespace HexView
 
 			for (var i = 0; i < value.Length; i++)
 			{
-				AppendChar(builder, value[i], true);
+				AppendChar(builder, value[i], stringChar: true);
 			}
 
 			builder.Append('"');
@@ -240,7 +240,7 @@ namespace HexView
 			}
 		}
 
-		static bool IsFlags(Type enumType) => enumType.IsDefined(typeof(FlagsAttribute), false);
+		static bool IsFlags(Type enumType) => enumType.IsDefined(typeof(FlagsAttribute), inherit: false);
 
 		#region IValueConverter Members
 
