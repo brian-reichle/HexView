@@ -26,11 +26,11 @@ namespace HexView.Data
 			}
 			else if (length > SizeCutoff)
 			{
-				return new PagedMemoryMappedDataSource(MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, true), length);
+				return new PagedMemoryMappedDataSource(MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, leaveOpen: true), length);
 			}
 			else
 			{
-				using var map = MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, true);
+				using var map = MemoryMappedFile.CreateFromFile(file, null, length, access, HandleInheritability.None, leaveOpen: true);
 				return new MemoryMappedDataSource(map.CreateViewAccessor(0, length, access), length);
 			}
 		}

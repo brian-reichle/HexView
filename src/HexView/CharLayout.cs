@@ -162,8 +162,8 @@ namespace HexView
 				toPoint = tmp;
 			}
 
-			first = (first << 4) + GetByteColumn(fromPoint.X, false);
-			last = (last << 4) + GetByteColumn(toPoint.X, true);
+			first = (first << 4) + GetByteColumn(fromPoint.X, roundLeft: false);
+			last = (last << 4) + GetByteColumn(toPoint.X, roundLeft: true);
 
 			return new Range(first, last - first + 1);
 		}
@@ -180,8 +180,8 @@ namespace HexView
 				toPoint = tmp;
 			}
 
-			first = (first << 4) + GetCharColumn(fromPoint.X, false);
-			last = (last << 4) + GetCharColumn(toPoint.X, true);
+			first = (first << 4) + GetCharColumn(fromPoint.X, roundLeft: false);
+			last = (last << 4) + GetCharColumn(toPoint.X, roundLeft: true);
 
 			return new Range(first, last - first + 1);
 		}
