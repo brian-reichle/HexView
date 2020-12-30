@@ -42,11 +42,9 @@ namespace HexView
 
 		static string? GetPluginDirectory()
 		{
-			var assembly = Assembly.GetExecutingAssembly();
-			var uri = new Uri(assembly.CodeBase!);
-			if (!uri.IsFile) return null;
-
-			var pluginDirectory = Path.Combine(Path.GetDirectoryName(uri.LocalPath)!, "Plugins");
+			var domain = AppDomain.CurrentDomain;
+			var searchPath = domain.RelativeSearchPath ?? domain.BaseDirectory;
+			var pluginDirectory = Path.Combine(searchPath, "Plugins");
 
 			if (!Directory.Exists(pluginDirectory))
 			{
