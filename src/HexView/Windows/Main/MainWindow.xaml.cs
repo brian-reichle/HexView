@@ -148,7 +148,7 @@ namespace HexView
 			var window = (MainWindow)sender;
 			var control = window.HexControl;
 
-			var dialog = new ShowDialog(control.Data, control.SelectionStart, control.SelectionLength);
+			var dialog = new ShowDialog(control.Data ?? DataSource.Empty, control.SelectionStart, control.SelectionLength);
 			dialog.Owner = window;
 			dialog.ShowDialog();
 		}
