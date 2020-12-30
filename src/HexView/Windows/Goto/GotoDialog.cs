@@ -37,7 +37,7 @@ namespace HexView
 
 		#region INotifyPropertyChanged Members
 
-		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+		event PropertyChangedEventHandler? INotifyPropertyChanged.PropertyChanged
 		{
 			add => PropertyChanged += value;
 			remove => PropertyChanged -= value;
