@@ -13,7 +13,7 @@ namespace HexView.Framework
 		}
 
 		public override string Name => "Notifications";
-		public override Range? ByteRange => null;
+		public override ByteRange? ByteRange => null;
 		protected override int Count => _notifications.Count;
 
 		protected override IStructuralNode CreateChildNode(int index)

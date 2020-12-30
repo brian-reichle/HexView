@@ -9,7 +9,7 @@ namespace HexView.Framework
 		IReadOnlyList<IStructuralNode> Children { get; }
 
 		string Name { get; }
-		Range? ByteRange { get; }
+		ByteRange? ByteRange { get; }
 		object? Value { get; }
 	}
 }

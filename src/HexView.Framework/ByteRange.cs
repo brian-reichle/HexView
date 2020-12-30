@@ -4,9 +4,9 @@ using System.Diagnostics;
 namespace HexView.Framework
 {
 	[DebuggerDisplay("({Offset}, {Length}")]
-	public sealed class Range
+	public sealed class ByteRange
 	{
-		public Range(long offset, long length)
+		public ByteRange(long offset, long length)
 		{
 			Offset = offset;
 			Length = length;

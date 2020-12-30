@@ -6,7 +6,6 @@ using System.Windows.Input;
 using HexView.Data;
 using HexView.Framework;
 using Microsoft.Win32;
-using Range = HexView.Framework.Range;
 
 namespace HexView
 {
@@ -201,7 +200,7 @@ namespace HexView
 			}
 		}
 
-		void SelectRange(Range? range)
+		void SelectRange(ByteRange? range)
 		{
 			if (range == null)
 			{

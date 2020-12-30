@@ -45,7 +45,7 @@ namespace HexView.Plugins.Sample.PE
 			}
 		}
 
-		public override Range ByteRange => new Range(_offset, 8);
+		public override ByteRange ByteRange => new ByteRange(_offset, 8);
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{

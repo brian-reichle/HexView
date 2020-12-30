@@ -30,13 +30,13 @@ namespace HexView.Plugins.Sample.PE
 			}
 		}
 
-		public override Range ByteRange
+		public override ByteRange ByteRange
 		{
 			get
 			{
 				if (_byteRange == null)
 				{
-					_byteRange = new Range(
+					_byteRange = new ByteRange(
 						_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_PointerToRawData_Offset),
 						_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_SizeOfRawData_Offset));
 				}
@@ -87,7 +87,7 @@ namespace HexView.Plugins.Sample.PE
 		}
 
 		string? _name;
-		Range? _byteRange;
+		ByteRange? _byteRange;
 		readonly PEStructuralNodeProvider _provider;
 		readonly long _tableReccordOffset;
 	}
