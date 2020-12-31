@@ -11,11 +11,11 @@ namespace HexView.Plugins.Sample.PE
 			: base(parent)
 		{
 			_provider = provider;
-			ByteRange = new Range(_provider.MetaDataOffset, length);
+			ByteRange = new ByteRange(_provider.MetaDataOffset, length);
 		}
 
 		public override string Name => "MetaData";
-		public override Range ByteRange { get; }
+		public override ByteRange ByteRange { get; }
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{

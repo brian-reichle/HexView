@@ -15,7 +15,7 @@ namespace HexView.Framework
 
 		public IStructuralNode? Parent { get; }
 		public abstract string Name { get; }
-		public abstract Range? ByteRange { get; }
+		public abstract ByteRange? ByteRange { get; }
 		protected abstract int Count { get; }
 		public virtual object? Value => null;
 		public IReadOnlyList<IStructuralNode> Children => this;
@@ -32,7 +32,7 @@ namespace HexView.Framework
 			}
 		}
 
-		int IndexOf(IStructuralNode node)
+		int IndexOf(IStructuralNode? node)
 		{
 			var count = Count;
 
@@ -77,14 +77,14 @@ namespace HexView.Framework
 
 		#region IList Members
 
-		int IList.Add(object value) => throw new NotSupportedException();
+		int IList.Add(object? value) => throw new NotSupportedException();
 		void IList.Clear() => throw new NotSupportedException();
-		void IList.Insert(int index, object value) => throw new NotSupportedException();
-		void IList.Remove(object value) => throw new NotSupportedException();
+		void IList.Insert(int index, object? value) => throw new NotSupportedException();
+		void IList.Remove(object? value) => throw new NotSupportedException();
 		void IList.RemoveAt(int index) => throw new NotSupportedException();
 
-		bool IList.Contains(object value) => IndexOf((IStructuralNode)value) >= 0;
-		int IList.IndexOf(object value) => IndexOf((IStructuralNode)value);
+		bool IList.Contains(object? value) => IndexOf((IStructuralNode?)value) >= 0;
+		int IList.IndexOf(object? value) => IndexOf((IStructuralNode?)value);
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		bool IList.IsFixedSize => true;
@@ -92,7 +92,7 @@ namespace HexView.Framework
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		bool IList.IsReadOnly => true;
 
-		object IList.this[int index]
+		object? IList.this[int index]
 		{
 			get => CreateChildNode(index);
 			set => throw new NotSupportedException();

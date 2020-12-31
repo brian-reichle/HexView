@@ -114,7 +114,7 @@ namespace HexView.Data
 			}
 			else
 			{
-				var node = _mru.Last;
+				var node = _mru.Last!;
 				_mru.Remove(node);
 				node.Value.Accessor.Dispose();
 				node.Value = new PageData(pageBaseAddress, newAccessor);

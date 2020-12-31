@@ -17,7 +17,7 @@ namespace HexView.Plugins.Sample.PE
 
 		public override string Name => "Resource Directory";
 
-		public override Range ByteRange
+		public override ByteRange ByteRange
 		{
 			get
 			{
@@ -27,7 +27,7 @@ namespace HexView.Plugins.Sample.PE
 					var idEntryCount = _provider.Data.Read<ushort>(_offset + 14);
 					var entryCount = nameEntryCount + idEntryCount;
 
-					_range = new Range(_offset, PETemplates.ResourceDirectoryHeader.Width + entryCount * 8);
+					_range = new ByteRange(_offset, PETemplates.ResourceDirectoryHeader.Width + entryCount * 8);
 				}
 
 				return _range;
@@ -64,6 +64,6 @@ namespace HexView.Plugins.Sample.PE
 		readonly long _offset;
 		readonly int _depth;
 		readonly PEStructuralNodeProvider _provider;
-		Range? _range;
+		ByteRange? _range;
 	}
 }

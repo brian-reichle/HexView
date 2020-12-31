@@ -1,6 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
 
+#pragma warning disable CA1815
 namespace HexView.Framework
 {
 	public struct Component
@@ -19,3 +20,4 @@ namespace HexView.Framework
 		public long Offset { get; }
 	}
 }
+#pragma warning restore CA1815

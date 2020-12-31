@@ -71,15 +71,15 @@ namespace HexView
 			set => SetValue(SelectionLengthProperty, value);
 		}
 
-		public Brush DataBrush
+		public Brush? DataBrush
 		{
-			get => (Brush)GetValue(DataBrushProperty);
+			get => (Brush?)GetValue(DataBrushProperty);
 			set => SetValue(DataBrushProperty, value);
 		}
 
-		public Brush SelectionBrush
+		public Brush? SelectionBrush
 		{
-			get => (Brush)GetValue(SelectionBrushProperty);
+			get => (Brush?)GetValue(SelectionBrushProperty);
 			set => SetValue(SelectionBrushProperty, value);
 		}
 

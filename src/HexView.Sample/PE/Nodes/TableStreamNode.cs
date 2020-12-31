@@ -13,11 +13,11 @@ namespace HexView.Plugins.Sample.PE
 		{
 			_provider = provider;
 			Name = name;
-			ByteRange = new Range(offset, length);
+			ByteRange = new ByteRange(offset, length);
 		}
 
 		public override string Name { get; }
-		public override Range ByteRange { get; }
+		public override ByteRange ByteRange { get; }
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{

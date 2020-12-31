@@ -13,7 +13,7 @@ namespace HexView.Plugins.Sample.PE
 		}
 
 		public override string Name => "Sections";
-		public override Range? ByteRange => null;
+		public override ByteRange? ByteRange => null;
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{

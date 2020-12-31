@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
-using Range = HexView.Framework.Range;
+using HexView.Framework;
 
 namespace HexView
 {
@@ -121,7 +121,7 @@ namespace HexView
 			return CreateSelectionRectangleFromCells(firstRow, firstColumn, lastRow, lastColumn, section);
 		}
 
-		public Range? RangeFromDrag(Point fromPoint, Point toPoint)
+		public ByteRange? RangeFromDrag(Point fromPoint, Point toPoint)
 		{
 			var category = CategoriseDrag(fromPoint.X, toPoint.X);
 
@@ -141,16 +141,16 @@ namespace HexView
 			};
 		}
 
-		Range RangeFromDrag_FullLines(Point fromPoint, Point toPoint)
+		ByteRange RangeFromDrag_FullLines(Point fromPoint, Point toPoint)
 		{
 			var line1 = (long)Math.Floor(fromPoint.Y / CellHeight);
 			var line2 = (long)Math.Floor(toPoint.Y / CellHeight);
 			line1 <<= 4;
 
-			return new Range(line1, (line2 << 4) - line1 + 0x10);
+			return new ByteRange(line1, (line2 << 4) - line1 + 0x10);
 		}
 
-		Range RangeFromDrag_Bytes(Point fromPoint, Point toPoint)
+		ByteRange RangeFromDrag_Bytes(Point fromPoint, Point toPoint)
 		{
 			var first = (long)Math.Floor(fromPoint.Y / CellHeight);
 			var last = (long)Math.Floor(toPoint.Y / CellHeight);
@@ -165,10 +165,10 @@ namespace HexView
 			first = (first << 4) + GetByteColumn(fromPoint.X, roundLeft: false);
 			last = (last << 4) + GetByteColumn(toPoint.X, roundLeft: true);
 
-			return new Range(first, last - first + 1);
+			return new ByteRange(first, last - first + 1);
 		}
 
-		Range RangeFromDrag_Chars(Point fromPoint, Point toPoint)
+		ByteRange RangeFromDrag_Chars(Point fromPoint, Point toPoint)
 		{
 			var first = (long)Math.Floor(fromPoint.Y / CellHeight);
 			var last = (long)Math.Floor(toPoint.Y / CellHeight);
@@ -183,7 +183,7 @@ namespace HexView
 			first = (first << 4) + GetCharColumn(fromPoint.X, roundLeft: false);
 			last = (last << 4) + GetCharColumn(toPoint.X, roundLeft: true);
 
-			return new Range(first, last - first + 1);
+			return new ByteRange(first, last - first + 1);
 		}
 
 		int CategoriseDrag(double fromX, double toX)

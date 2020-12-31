@@ -6,7 +6,6 @@ using System.Windows.Input;
 using HexView.Data;
 using HexView.Framework;
 using Microsoft.Win32;
-using Range = HexView.Framework.Range;
 
 namespace HexView
 {
@@ -149,7 +148,7 @@ namespace HexView
 			var window = (MainWindow)sender;
 			var control = window.HexControl;
 
-			var dialog = new ShowDialog(control.Data, control.SelectionStart, control.SelectionLength);
+			var dialog = new ShowDialog(control.Data ?? DataSource.Empty, control.SelectionStart, control.SelectionLength);
 			dialog.Owner = window;
 			dialog.ShowDialog();
 		}
@@ -201,7 +200,7 @@ namespace HexView
 			}
 		}
 
-		void SelectRange(Range? range)
+		void SelectRange(ByteRange? range)
 		{
 			if (range == null)
 			{

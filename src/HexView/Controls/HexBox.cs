@@ -86,9 +86,9 @@ namespace HexView
 			_autoScrollTick = new DispatcherTimer(TimeSpan.FromMilliseconds(50), DispatcherPriority.Background, AutoScrollTick, Dispatcher);
 		}
 
-		public IDataSource Data
+		public IDataSource? Data
 		{
-			get => (IDataSource)GetValue(DataProperty);
+			get => (IDataSource?)GetValue(DataProperty);
 			set => SetValue(DataProperty, value);
 		}
 
@@ -358,7 +358,7 @@ namespace HexView
 		{
 			var box = (HexBox)d;
 			var view = box._view;
-			var data = (IDataSource)e.NewValue;
+			var data = (IDataSource?)e.NewValue;
 
 			box.DataLength = data == null ? 0 : data.ByteCount;
 			box.Select(0, 0);

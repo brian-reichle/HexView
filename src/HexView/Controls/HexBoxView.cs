@@ -7,7 +7,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using HexView.Framework;
-using Range = HexView.Framework.Range;
 
 namespace HexView
 {
@@ -78,7 +77,7 @@ namespace HexView
 			return new Point(x, y);
 		}
 
-		public Range? RangeFromDrag(Point fromExtentPoint, Point toExtentPoint)
+		public ByteRange? RangeFromDrag(Point fromExtentPoint, Point toExtentPoint)
 		{
 			return _layout?.RangeFromDrag(fromExtentPoint, toExtentPoint);
 		}

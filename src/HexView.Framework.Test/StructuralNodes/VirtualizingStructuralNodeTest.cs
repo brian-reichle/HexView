@@ -13,7 +13,7 @@ namespace HexView.Framework.Test
 		public void LazyCreateChildren()
 		{
 			var mockFactory = new Mock<Func<int, IStructuralNode>>(MockBehavior.Strict);
-			var node = new Dummy(null, "<name>", new Range(100, 50), 2, mockFactory.Object);
+			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
 			var children = node.Children;
 
 			Assert.That(children.Count, Is.EqualTo(2));
@@ -35,7 +35,7 @@ namespace HexView.Framework.Test
 		public void CreateItemEachTime()
 		{
 			var mockFactory = new Mock<Func<int, IStructuralNode>>(MockBehavior.Strict);
-			var node = new Dummy(null, "<name>", new Range(100, 50), 2, mockFactory.Object);
+			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
 			var children = node.Children;
 
 			Assert.That(children.Count, Is.EqualTo(2));
@@ -50,7 +50,7 @@ namespace HexView.Framework.Test
 		[Test]
 		public void DontHoldAReferenceToChildren()
 		{
-			var node = new Dummy(null, "<name>", new Range(100, 50), 2, (int index) => CreateChild(0));
+			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, (int index) => CreateChild(0));
 			var weakChild = GetWeakItem(node, 0);
 
 			GC.Collect();
@@ -60,7 +60,7 @@ namespace HexView.Framework.Test
 		static Dummy CreateChild(int index) => new Dummy(
 			null,
 			"<child" + index + ">",
-			new Range(100 + index * 25, 25),
+			new ByteRange(100 + index * 25, 25),
 			0,
 			x => throw new InvalidOperationException());
 
@@ -69,7 +69,7 @@ namespace HexView.Framework.Test
 
 		sealed class Dummy : VirtualizingStructuralNode
 		{
-			public Dummy(IStructuralNode? parent, string name, Range byteRange, int count, Func<int, IStructuralNode> factory)
+			public Dummy(IStructuralNode? parent, string name, ByteRange byteRange, int count, Func<int, IStructuralNode> factory)
 				: base(parent)
 			{
 				Name = name;
@@ -79,7 +79,7 @@ namespace HexView.Framework.Test
 			}
 
 			public override string Name { get; }
-			public override Range ByteRange { get; }
+			public override ByteRange ByteRange { get; }
 			protected override int Count { get; }
 
 			protected override IStructuralNode CreateChildNode(int index) => _factory(index);

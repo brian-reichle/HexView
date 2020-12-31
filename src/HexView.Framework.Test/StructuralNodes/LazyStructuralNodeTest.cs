@@ -17,7 +17,7 @@ namespace HexView.Framework.Test
 			var node = new Dummy(
 				null,
 				"<name>",
-				new Range(100, 50),
+				new ByteRange(100, 50),
 				() => mock.Object);
 
 			mock.Setup(x => x.Count).Returns(0);
@@ -31,7 +31,7 @@ namespace HexView.Framework.Test
 			var node = new Dummy(
 				null,
 				"<name>",
-				new Range(100, 50),
+				new ByteRange(100, 50),
 				() => null!);
 
 			Assert.That(node.Children, Is.SameAs(Array.Empty<IStructuralNode>()));
@@ -40,13 +40,13 @@ namespace HexView.Framework.Test
 		[Test]
 		public void Children()
 		{
-			var child1 = new Dummy(null, "<child1>", new Range(100, 25), CreateForbiddenFactory());
-			var child2 = new Dummy(null, "<child2>", new Range(125, 25), CreateForbiddenFactory());
+			var child1 = new Dummy(null, "<child1>", new ByteRange(100, 25), CreateForbiddenFactory());
+			var child2 = new Dummy(null, "<child2>", new ByteRange(125, 25), CreateForbiddenFactory());
 
 			var node = new Dummy(
 				null,
 				"<name>",
-				new Range(100, 50),
+				new ByteRange(100, 50),
 				() => new[] { child1, child2 });
 
 			Assert.That(node.Children, Is.EquivalentTo(new[] { child1, child2 }));
@@ -57,9 +57,9 @@ namespace HexView.Framework.Test
 		{
 			var mockFactory = new Mock<Func<IList<IStructuralNode>>>(MockBehavior.Strict);
 
-			var node = new Dummy(null, "<name>", new Range(100, 50), mockFactory.Object);
-			var child1 = new Dummy(node, "<child1>", new Range(100, 25), CreateForbiddenFactory());
-			var child2 = new Dummy(node, "<child2>", new Range(125, 25), CreateForbiddenFactory());
+			var node = new Dummy(null, "<name>", new ByteRange(100, 50), mockFactory.Object);
+			var child1 = new Dummy(node, "<child1>", new ByteRange(100, 25), CreateForbiddenFactory());
+			var child2 = new Dummy(node, "<child2>", new ByteRange(125, 25), CreateForbiddenFactory());
 			var children = new[] { child1, child2 };
 
 			mockFactory
@@ -75,7 +75,7 @@ namespace HexView.Framework.Test
 
 		sealed class Dummy : LazyStructuralNode
 		{
-			public Dummy(IStructuralNode? parent, string name, Range byteRange, Func<IList<IStructuralNode>> childFactory)
+			public Dummy(IStructuralNode? parent, string name, ByteRange byteRange, Func<IList<IStructuralNode>> childFactory)
 				: base(parent)
 			{
 				Name = name;
@@ -84,7 +84,7 @@ namespace HexView.Framework.Test
 			}
 
 			public override string Name { get; }
-			public override Range ByteRange { get; }
+			public override ByteRange ByteRange { get; }
 
 			protected override IList<IStructuralNode> CreateChildNodes() => _childFactory();
 

@@ -14,7 +14,7 @@ namespace HexView.Framework
 		}
 
 		public abstract string Name { get; }
-		public abstract Range? ByteRange { get; }
+		public abstract ByteRange? ByteRange { get; }
 		public IStructuralNode? Parent { get; }
 		public virtual object? Value => null;
 
