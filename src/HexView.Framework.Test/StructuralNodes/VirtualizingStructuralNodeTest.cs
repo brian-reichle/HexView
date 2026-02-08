@@ -1,7 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Moq;
 using NUnit.Framework;
 
 namespace HexView.Framework.Test
@@ -12,40 +12,73 @@ namespace HexView.Framework.Test
 		[Test]
 		public void LazyCreateChildren()
 		{
-			var mockFactory = new Mock<Func<int, IStructuralNode>>(MockBehavior.Strict);
-			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
+			var requests = new List<int>();
+
+			var node = new Dummy(
+				null,
+				"<name>",
+				new ByteRange(100, 50),
+				2,
+				index =>
+				{
+					requests.Add(index);
+					return CreateChild(index);
+				});
+
 			var children = node.Children;
 
-			Assert.That(children, Has.Count.EqualTo(2));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(children, Has.Count.EqualTo(2));
+				Assert.That(requests, Is.Empty);
+			}
 
-			mockFactory
-				.Setup(x => x(1))
-				.Returns((int index) => CreateChild(1));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(children[1].Name, Is.EqualTo("<child1>"));
+				Assert.That(requests, Is.EqualTo([1]));
+			}
 
-			Assert.That(children[1].Name, Is.EqualTo("<child1>"));
+			requests.Clear();
 
-			mockFactory
-				.Setup(x => x(0))
-				.Returns((int index) => CreateChild(0));
-
-			Assert.That(children[0].Name, Is.EqualTo("<child0>"));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(children[0].Name, Is.EqualTo("<child0>"));
+				Assert.That(requests, Is.EqualTo([0]));
+			}
 		}
 
 		[Test]
 		public void CreateItemEachTime()
 		{
-			var mockFactory = new Mock<Func<int, IStructuralNode>>(MockBehavior.Strict);
-			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
+			var requests = new List<int>();
+
+			var node = new Dummy(
+				null,
+				"<name>",
+				new ByteRange(100, 50),
+				2,
+				index =>
+				{
+					requests.Add(index);
+					return CreateChild(index);
+				});
+
 			var children = node.Children;
 
-			Assert.That(children, Has.Count.EqualTo(2));
-
-			mockFactory
-				.Setup(x => x(0))
-				.Returns((int index) => CreateChild(1));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(children, Has.Count.EqualTo(2));
+				Assert.That(requests, Is.Empty);
+			}
 
 			var firstChild = children[0];
-			Assert.That(children[0], Is.Not.SameAs(firstChild), "Should have created a new instance.");
+
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(children[0], Is.Not.SameAs(firstChild), "Should have created a new instance.");
+				Assert.That(requests, Is.EqualTo([0, 0]));
+			}
 		}
 
 		[Test]
