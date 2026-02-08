@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexView", "HexView\HexView.csproj", "{02276D5F-0163-4148-A535-CB9F689B9CE2}"
 EndProject
@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{EA
 		..\.editorconfig = ..\.editorconfig
 		..\.github\workflows\build.yaml = ..\.github\workflows\build.yaml
 		..\Directory.Build.props = ..\Directory.Build.props
+		..\Directory.Packages.props = ..\Directory.Packages.props
 		..\global.json = ..\global.json
 		UnitTest.editorconfig = UnitTest.editorconfig
 	EndProjectSection
