@@ -39,10 +39,7 @@ namespace HexView
 			var textBox = (TextBox)sender;
 			var binding = BindingOperations.GetBindingExpression(textBox, TextBox.TextProperty);
 
-			if (binding != null)
-			{
-				binding.UpdateSource();
-			}
+			binding?.UpdateSource();
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace HexView
 	{
 		static ShowDialog()
 		{
-			CommandManager.RegisterClassCommandBinding(typeof(ShowDialog), new CommandBinding(ApplicationCommands.Close, OnCloseExecuted));
+			CommandManager.RegisterClassCommandBinding(typeof(ShowDialog), new(ApplicationCommands.Close, OnCloseExecuted));
 		}
 
 		public ShowDialog(IDataSource source, long selectionStart, long selectionLength)

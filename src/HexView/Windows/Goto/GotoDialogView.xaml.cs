@@ -18,7 +18,7 @@ namespace HexView
 			base.OnInitialized(e);
 			PositionTextBox.Focus();
 
-			Dispatcher.BeginInvoke((Action)PositionTextBox.SelectAll, DispatcherPriority.Loaded);
+			Dispatcher.BeginInvoke(PositionTextBox.SelectAll, DispatcherPriority.Loaded);
 		}
 
 		void OkClick(object sender, RoutedEventArgs e)

@@ -101,8 +101,8 @@ namespace HexView
 		}
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		static readonly List<IFormatReader> _readers_internal = new List<IFormatReader>();
+		static readonly List<IFormatReader> _readers_internal = [];
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		static readonly ReadOnlyCollection<IFormatReader> _readers = new ReadOnlyCollection<IFormatReader>(_readers_internal);
+		static readonly ReadOnlyCollection<IFormatReader> _readers = new(_readers_internal);
 	}
 }
