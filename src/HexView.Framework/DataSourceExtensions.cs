@@ -9,7 +9,7 @@ namespace HexView.Framework
 		public static T Read<T>(this IDataSource source, long offset)
 			where T : unmanaged
 		{
-			if (source == null) throw new ArgumentNullException(nameof(source));
+			ArgumentNullException.ThrowIfNull(source);
 
 			var value = default(T);
 			source.CopyTo(offset, AsSpan(ref value));

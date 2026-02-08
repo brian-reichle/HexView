@@ -1,0 +1,7 @@
+is_global = true
+
+# Making unit tests sealed often causes other issues.
+dotnet_diagnostic.CA1852.severity = none
+
+# Unit tests rarely benefit from staticly caching these arrays.
+dotnet_diagnostic.CA1861.severity = none

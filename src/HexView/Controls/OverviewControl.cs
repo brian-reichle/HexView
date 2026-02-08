@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace HexView
 {
-	class OverviewControl : Control
+	sealed class OverviewControl : Control
 	{
 		public static readonly DependencyProperty DataLengthProperty = DependencyProperty.Register(
 			nameof(DataLength),

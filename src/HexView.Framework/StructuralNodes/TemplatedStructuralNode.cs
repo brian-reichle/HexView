@@ -8,8 +8,8 @@ namespace HexView.Framework
 		public TemplatedStructuralNode(IDataSource data, IStructuralNode? parent, string name, IStructuralNodeTemplate template, long offset)
 			: base(parent)
 		{
-			if (data == null) throw new ArgumentNullException(nameof(data));
-			if (template == null) throw new ArgumentNullException(nameof(template));
+			ArgumentNullException.ThrowIfNull(data);
+			ArgumentNullException.ThrowIfNull(template);
 
 			_data = data;
 			Name = name;

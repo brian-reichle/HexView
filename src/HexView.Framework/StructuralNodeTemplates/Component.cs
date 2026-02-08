@@ -8,7 +8,7 @@ namespace HexView.Framework
 	{
 		public Component(string name, IStructuralNodeTemplate template, long offset)
 		{
-			if (template == null) throw new ArgumentNullException(nameof(template));
+			ArgumentNullException.ThrowIfNull(template);
 
 			Name = name;
 			Template = template;

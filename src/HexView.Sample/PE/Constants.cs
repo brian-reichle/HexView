@@ -40,7 +40,7 @@ namespace HexView.Plugins.Sample.PE
 
 		public static string GetDirectoryName(int index)
 		{
-			if (index >= DirectoryNames.Count)
+			if (index >= DirectoryNames.Length)
 			{
 				return "Directory" + index;
 			}
@@ -50,7 +50,7 @@ namespace HexView.Plugins.Sample.PE
 			}
 		}
 
-		static readonly IList<string> DirectoryNames = new[]
+		static readonly string[] DirectoryNames = new[]
 		{
 			"Export Table",
 			"Import Table",

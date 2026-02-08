@@ -9,7 +9,7 @@ using HexView.Framework;
 
 namespace HexView
 {
-	partial class ShowDialog : Window
+	sealed partial class ShowDialog : Window
 	{
 		static ShowDialog()
 		{

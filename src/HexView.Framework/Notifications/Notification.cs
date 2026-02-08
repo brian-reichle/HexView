@@ -7,8 +7,8 @@ namespace HexView.Framework
 	{
 		public Notification(long offset, IStructuralNodeTemplate template, string message)
 		{
-			if (template == null) throw new ArgumentNullException(nameof(template));
-			if (string.IsNullOrEmpty(message)) throw new ArgumentNullException(nameof(message));
+			ArgumentNullException.ThrowIfNull(template);
+			ArgumentException.ThrowIfNullOrEmpty(message);
 
 			Offset = offset;
 			Template = template;

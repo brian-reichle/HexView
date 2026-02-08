@@ -15,8 +15,8 @@ namespace HexView.Framework
 
 		public RepeatingNodeTemplate(IStructuralNodeTemplate itemTemplate, int itemCount, Func<int, long, string> getName, long itemWidthOverride)
 		{
-			if (itemTemplate == null) throw new ArgumentNullException(nameof(itemTemplate));
-			if (getName == null) throw new ArgumentNullException(nameof(getName));
+			ArgumentNullException.ThrowIfNull(itemTemplate);
+			ArgumentNullException.ThrowIfNull(getName);
 
 			_itemTemplate = itemTemplate;
 			_getName = getName;

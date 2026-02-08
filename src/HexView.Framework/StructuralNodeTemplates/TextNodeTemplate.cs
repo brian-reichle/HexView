@@ -10,7 +10,7 @@ namespace HexView.Framework
 	{
 		public TextNodeTemplate(int width, Encoding encoding)
 		{
-			if (encoding == null) throw new ArgumentNullException(nameof(encoding));
+			ArgumentNullException.ThrowIfNull(encoding);
 
 			_width = width;
 			_encoding = encoding;
