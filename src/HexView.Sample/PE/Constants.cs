@@ -1,6 +1,4 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
-using System.Collections.Generic;
-
 namespace HexView.Plugins.Sample.PE
 {
 	static class Constants
@@ -40,7 +38,7 @@ namespace HexView.Plugins.Sample.PE
 
 		public static string GetDirectoryName(int index)
 		{
-			if (index >= DirectoryNames.Count)
+			if (index >= DirectoryNames.Length)
 			{
 				return "Directory" + index;
 			}
@@ -50,8 +48,8 @@ namespace HexView.Plugins.Sample.PE
 			}
 		}
 
-		static readonly IList<string> DirectoryNames = new[]
-		{
+		static readonly string[] DirectoryNames =
+		[
 			"Export Table",
 			"Import Table",
 			"Resource Table",
@@ -68,6 +66,6 @@ namespace HexView.Plugins.Sample.PE
 			"Delay Import Descriptor",
 			"CLI Header",
 			"Reserved",
-		};
+		];
 	}
 }

@@ -106,7 +106,7 @@ namespace HexView.Plugins.Sample.PE
 		RT_VERSION = 16,
 
 		/// <summary>
-		/// VXD
+		/// VXD.
 		/// </summary>
 		RT_VXD = 20,
 	}

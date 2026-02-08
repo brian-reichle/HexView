@@ -1,5 +1,4 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -27,17 +26,7 @@ namespace HexView.Plugins.Sample.PE
 		public int MetaDataOffset { get; private set; }
 
 		public IReadOnlyList<KeyValuePair<string, int>> StreamHeaderOffsets
-		{
-			get
-			{
-				if (_streamHeaderOffsets == null)
-				{
-					_streamHeaderOffsets = CalculateMetaDataOffsets();
-				}
-
-				return _streamHeaderOffsets;
-			}
-		}
+			=> _streamHeaderOffsets ??= CalculateMetaDataOffsets();
 
 		public IDataSource Data { get; }
 
@@ -207,7 +196,7 @@ namespace HexView.Plugins.Sample.PE
 		{
 			if (MetaDataOffset == 0)
 			{
-				return Array.Empty<KeyValuePair<string, int>>();
+				return [];
 			}
 
 			var length = Data.Read<int>(MetaDataOffset + 12);
@@ -237,11 +226,7 @@ namespace HexView.Plugins.Sample.PE
 
 		void AddNotification(long offset, IStructuralNodeTemplate template, string message)
 		{
-			if (_notifications == null)
-			{
-				_notifications = new List<Notification>();
-			}
-
+			_notifications ??= [];
 			_notifications.Add(offset, template, message);
 		}
 

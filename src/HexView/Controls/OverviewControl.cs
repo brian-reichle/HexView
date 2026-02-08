@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace HexView
 {
-	class OverviewControl : Control
+	sealed class OverviewControl : Control
 	{
 		public static readonly DependencyProperty DataLengthProperty = DependencyProperty.Register(
 			nameof(DataLength),
@@ -89,7 +89,7 @@ namespace HexView
 			set => SetValue(SelectionOpacityProperty, value);
 		}
 
-		protected override Size MeasureOverride(Size availableSize) => new Size(20, 0);
+		protected override Size MeasureOverride(Size availableSize) => new(20, 0);
 
 		protected override Size ArrangeOverride(Size finalSize)
 		{
@@ -117,7 +117,7 @@ namespace HexView
 
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			drawingContext.PushGuidelineSet(new GuidelineSet(new[] { 0d, ActualWidth }, new[] { 0d, ActualHeight }));
+			drawingContext.PushGuidelineSet(new GuidelineSet([0d, ActualWidth], [0d, ActualHeight]));
 			drawingContext.DrawRectangle(Background, null, new Rect(0, 0, ActualWidth, ActualHeight));
 			drawingContext.PushTransform(new TranslateTransform(2, 0));
 			drawingContext.PushTransform(_renderTransform);

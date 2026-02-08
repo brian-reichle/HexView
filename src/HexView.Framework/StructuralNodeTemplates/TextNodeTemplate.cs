@@ -10,14 +10,14 @@ namespace HexView.Framework
 	{
 		public TextNodeTemplate(int width, Encoding encoding)
 		{
-			if (encoding == null) throw new ArgumentNullException(nameof(encoding));
+			ArgumentNullException.ThrowIfNull(encoding);
 
 			_width = width;
 			_encoding = encoding;
 		}
 
 		public long Width => _width;
-		public IReadOnlyList<Component> Components => Array.Empty<Component>();
+		public IReadOnlyList<Component> Components => [];
 		public object? GetValue(IDataSource data, long offset) => data.ReadText(offset, _width, _encoding);
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -11,7 +11,7 @@ using HexView.Framework;
 namespace HexView
 {
 	[TemplatePart(Name = ScrollViewerPART, Type = typeof(ScrollViewer))]
-	class HexBox : Control
+	sealed class HexBox : Control
 	{
 		public const string ScrollViewerPART = "PART_ScrollViewer";
 

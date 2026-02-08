@@ -5,7 +5,7 @@ using HexView.Framework;
 
 namespace HexView
 {
-	public partial class SidePanel : UserControl
+	sealed partial class SidePanel : UserControl
 	{
 		public SidePanel()
 		{

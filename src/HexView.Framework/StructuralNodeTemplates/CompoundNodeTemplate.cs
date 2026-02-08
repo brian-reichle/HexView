@@ -11,7 +11,7 @@ namespace HexView.Framework
 	{
 		public CompoundNodeTemplate()
 		{
-			_list = new List<Component>();
+			_list = [];
 			_components = new ReadOnlyCollection<Component>(_list);
 			Width = 0;
 		}
@@ -25,7 +25,7 @@ namespace HexView.Framework
 
 		public void Add(PositionMode mode, long offset, string name, IStructuralNodeTemplate template)
 		{
-			if (template == null) throw new ArgumentNullException(nameof(template));
+			ArgumentNullException.ThrowIfNull(template);
 
 			long relativeOffset;
 

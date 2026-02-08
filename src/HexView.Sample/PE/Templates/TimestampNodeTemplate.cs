@@ -20,9 +20,9 @@ namespace HexView.Plugins.Sample.PE
 		public object? GetValue(IDataSource data, long offset)
 		{
 			var value = data.Read<uint>(offset);
-			return value == 0 ? null : (object)Epoch.AddSeconds(value);
+			return value == 0 ? null : Epoch.AddSeconds(value);
 		}
 
-		static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+		static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 	}
 }

@@ -21,7 +21,7 @@ namespace HexView.Framework
 		}
 
 		public long Width { get; }
-		public IReadOnlyList<Component> Components => Array.Empty<Component>();
+		public IReadOnlyList<Component> Components => [];
 		public object? GetValue(IDataSource data, long offset) => data.Read<T>(offset);
 	}
 }

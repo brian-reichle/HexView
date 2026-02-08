@@ -86,15 +86,8 @@ namespace HexView
 		{
 			var blob = _parent.Data;
 
-			if (_charSet == null)
-			{
-				_charSet = new HexCharSet(_parent);
-			}
-
-			if (_layout == null)
-			{
-				_layout = new CharLayout(_charSet.CellWidth, _charSet.CellHeight);
-			}
+			_charSet ??= new HexCharSet(_parent);
+			_layout ??= new CharLayout(_charSet.CellWidth, _charSet.CellHeight);
 
 			var lines = blob == null ? 1 : (blob.ByteCount + 15) >> 4;
 
@@ -323,8 +316,8 @@ namespace HexView
 				var blo = run.BaselineOrigin;
 
 				var guideLines = new GuidelineSet(
-					new[] { rect.Left + blo.X, rect.Right + blo.X },
-					new[] { rect.Top + blo.Y, rect.Bottom + blo.Y });
+					[rect.Left + blo.X, rect.Right + blo.X],
+					[rect.Top + blo.Y, rect.Bottom + blo.Y]);
 
 				context.PushGuidelineSet(guideLines);
 				context.DrawGlyphRun(brush, run);
@@ -356,7 +349,7 @@ namespace HexView
 
 			if (blob == null || count == 0)
 			{
-				return new LineSet(startingLine, Array.Empty<GlyphRun>());
+				return new LineSet(startingLine, []);
 			}
 
 			var y = 0d;

@@ -24,8 +24,8 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 
 			Assert.That(template.Width, Is.EqualTo(20));
 			Assert.That(template.Components.Count, Is.EqualTo(5));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(new[] { "(0, 0)", "(1, 4)", "(2, 8)", "(3, 12)", "(4, 16)" }));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo(new[] { 0, 4, 8, 12, 16 }));
+			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["(0, 0)", "(1, 4)", "(2, 8)", "(3, 12)", "(4, 16)"]));
+			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 8, 12, 16]));
 			Assert.That(template.Components.Select(x => x.Template), Has.All.EqualTo(mockChild.Object));
 		}
 

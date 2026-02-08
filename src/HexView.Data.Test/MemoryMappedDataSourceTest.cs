@@ -18,7 +18,7 @@ namespace HexView.Data.Test
 		{
 			var data = new byte[4];
 			_dataSource.CopyTo(16, data);
-			Assert.That(data, Is.EqualTo(new[] { 0x10, 0x11, 0x12, 0x13 }));
+			Assert.That(data, Is.EqualTo([0x10, 0x11, 0x12, 0x13]));
 		}
 
 		[Test]

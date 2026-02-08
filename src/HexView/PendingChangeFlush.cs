@@ -30,7 +30,7 @@ namespace HexView
 
 		public static void Flush(FrameworkElement element)
 		{
-			if (element == null) throw new ArgumentNullException(nameof(element));
+			ArgumentNullException.ThrowIfNull(element);
 			element.RaiseEvent(new RoutedEventArgs(FlushRequestEvent));
 		}
 

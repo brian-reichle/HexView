@@ -56,6 +56,6 @@ namespace HexView.Framework.Test
 			return ref Unsafe.As<byte, T>(ref data[0]);
 		}
 
-		readonly Dictionary<int, byte[]> _expectations = new Dictionary<int, byte[]>();
+		readonly Dictionary<int, byte[]> _expectations = [];
 	}
 }

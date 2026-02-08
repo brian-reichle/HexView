@@ -15,8 +15,8 @@ namespace HexView.Framework
 
 		public RepeatingNodeTemplate(IStructuralNodeTemplate itemTemplate, int itemCount, Func<int, long, string> getName, long itemWidthOverride)
 		{
-			if (itemTemplate == null) throw new ArgumentNullException(nameof(itemTemplate));
-			if (getName == null) throw new ArgumentNullException(nameof(getName));
+			ArgumentNullException.ThrowIfNull(itemTemplate);
+			ArgumentNullException.ThrowIfNull(getName);
 
 			_itemTemplate = itemTemplate;
 			_getName = getName;
@@ -27,7 +27,7 @@ namespace HexView.Framework
 		public long Width => _itemCount * _itemWidth;
 		public object? GetValue(IDataSource data, long offset) => null;
 		Component GetComponent(int index) => GetComponent(index, index * _itemWidth);
-		Component GetComponent(int index, long offset) => new Component(_getName(index, offset), _itemTemplate, offset);
+		Component GetComponent(int index, long offset) => new(_getName(index, offset), _itemTemplate, offset);
 
 		IEnumerator<Component> GetEnumerator()
 		{

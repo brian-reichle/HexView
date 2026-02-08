@@ -13,9 +13,7 @@ namespace HexView.Data.Test
 			{
 				file = MemoryMappedFile.CreateNew(null, size);
 				WritePattern(file, size);
-				var tmp = file;
-				file = null;
-				return tmp;
+				return file;
 			}
 			catch
 			{

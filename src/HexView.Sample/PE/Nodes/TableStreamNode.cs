@@ -28,12 +28,12 @@ namespace HexView.Plugins.Sample.PE
 			var rowCountsTemplate = CreateRowHeader(tableCodes);
 			var tableLestTemplate = CreateTableListNode(tableCodes, heapSizes);
 
-			return new IStructuralNode[]
-			{
+			return
+			[
 				new TemplatedStructuralNode(_provider.Data, this, "Table Header", PETemplates.TableStreamHeader, ByteRange.Offset),
 				new TemplatedStructuralNode(_provider.Data, this, "Row Counts", rowCountsTemplate, ByteRange.Offset + PETemplates.TableStreamHeader.Width),
 				new TemplatedStructuralNode(_provider.Data, this, "Tables", tableLestTemplate, ByteRange.Offset + PETemplates.TableStreamHeader.Width + rowCountsTemplate.Width),
-			};
+			];
 		}
 
 		IStructuralNodeTemplate CreateTableListNode(MetaDataTableCodes[] codes, HeapSizeFlags heapSizes)

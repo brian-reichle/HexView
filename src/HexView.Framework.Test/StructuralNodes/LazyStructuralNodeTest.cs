@@ -47,9 +47,9 @@ namespace HexView.Framework.Test
 				null,
 				"<name>",
 				new ByteRange(100, 50),
-				() => new[] { child1, child2 });
+				() => [child1, child2]);
 
-			Assert.That(node.Children, Is.EquivalentTo(new[] { child1, child2 }));
+			Assert.That(node.Children, Is.EquivalentTo([child1, child2]));
 		}
 
 		[Test]
