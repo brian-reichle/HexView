@@ -18,6 +18,7 @@ CS1591 - Missing XML comment.
     <NoWarn>1591</NoWarn>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
   <PropertyGroup>
