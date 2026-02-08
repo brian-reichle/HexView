@@ -6,8 +6,6 @@
     <ApplicationIcon>Resources\HexView.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
-    <Nullable Condition="'$(TargetFramework)' == 'net472'">annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
