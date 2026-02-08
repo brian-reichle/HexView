@@ -1,4 +1,4 @@
-is_global = true
+[*.cs]
 
 # Making unit tests sealed often causes other issues.
 dotnet_diagnostic.CA1852.severity = none

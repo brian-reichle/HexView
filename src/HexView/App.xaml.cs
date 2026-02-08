@@ -5,7 +5,7 @@ using HexView.Data;
 
 namespace HexView
 {
-	public partial class App : Application
+	sealed partial class App : Application
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{

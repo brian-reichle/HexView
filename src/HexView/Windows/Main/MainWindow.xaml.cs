@@ -9,7 +9,7 @@ using Microsoft.Win32;
 
 namespace HexView
 {
-	public partial class MainWindow : Window
+	sealed partial class MainWindow : Window
 	{
 		static MainWindow()
 		{

@@ -6,7 +6,7 @@ using System.Windows.Threading;
 
 namespace HexView
 {
-	public partial class GotoDialogView : Window
+	sealed partial class GotoDialogView : Window
 	{
 		public GotoDialogView()
 		{

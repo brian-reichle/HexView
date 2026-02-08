@@ -10,7 +10,7 @@ using HexView.Framework;
 
 namespace HexView
 {
-	public static class PluginLoader
+	static class PluginLoader
 	{
 		public static ReadOnlyCollection<IFormatReader> Readers => _readers;
 
