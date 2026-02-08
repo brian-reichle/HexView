@@ -1,5 +1,4 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
-using Moq;
 using NUnit.Framework;
 
 namespace HexView.Framework.Test.StructuralNodeTemplate
@@ -24,10 +23,11 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 		[Test]
 		public void GetValue()
 		{
-			var mockData = new Mock<IDataSource>(MockBehavior.Strict);
+			var data = new DummyDataSource(200);
+			data.Set(100, new byte[42]);
 
 			var template = new BlobNodeTemplate(42);
-			Assert.That(template.GetValue(mockData.Object, 100), Is.Null);
+			Assert.That(template.GetValue(data, 100), Is.Null);
 		}
 	}
 }
