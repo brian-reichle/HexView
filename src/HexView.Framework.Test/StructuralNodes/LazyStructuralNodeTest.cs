@@ -1,7 +1,7 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
 using System;
 using System.Collections.Generic;
-using Moq;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace HexView.Framework.Test
@@ -12,15 +12,11 @@ namespace HexView.Framework.Test
 		[Test]
 		public void EmptyChildren()
 		{
-			var mock = new Mock<IList<IStructuralNode>>(MockBehavior.Strict);
-
 			var node = new Dummy(
 				null,
 				"<name>",
 				new ByteRange(100, 50),
-				() => mock.Object);
-
-			mock.Setup(x => x.Count).Returns(0);
+				() => []);
 
 			Assert.That(node.Children, Is.SameAs(Array.Empty<IStructuralNode>()));
 		}
@@ -55,24 +51,35 @@ namespace HexView.Framework.Test
 		[Test]
 		public void CacheChildren()
 		{
-			var mockFactory = new Mock<Func<IList<IStructuralNode>>>(MockBehavior.Strict);
+			IStructuralNode[]? children = null;
+			var count = 0;
 
-			var node = new Dummy(null, "<name>", new ByteRange(100, 50), mockFactory.Object);
-			var child1 = new Dummy(node, "<child1>", new ByteRange(100, 25), CreateForbiddenFactory());
-			var child2 = new Dummy(node, "<child2>", new ByteRange(125, 25), CreateForbiddenFactory());
-			var children = new[] { child1, child2 };
+			var node = new Dummy(
+				null,
+				"<name>",
+				new ByteRange(100, 50),
+				() =>
+				{
+					count++;
+					return children ?? throw new UnreachableException();
+				});
 
-			mockFactory
-				.Setup(x => x())
-				.Returns(() => children);
+			children =
+			[
+				new Dummy(node, "<child1>", new ByteRange(100, 25), CreateForbiddenFactory()),
+				new Dummy(node, "<child2>", new ByteRange(125, 25), CreateForbiddenFactory())
+			];
 
-			var resultChildren = node.Children;
-			Assert.That(node.Children, Is.SameAs(resultChildren), "Second call to node.Children should have returned the same collection.");
-
-			mockFactory.Verify(x => x(), Times.Once);
+			using (Assert.EnterMultipleScope())
+			{
+				var resultChildren = node.Children;
+				Assert.That(node.Children, Is.SameAs(resultChildren), "Second call to node.Children should have returned the same collection.");
+				Assert.That(count, Is.EqualTo(1), "Should have only hit the factory once.");
+			}
 		}
 
-		static Func<IList<IStructuralNode>> CreateForbiddenFactory() => new Mock<Func<IList<IStructuralNode>>>(MockBehavior.Strict).Object;
+		static Func<IList<IStructuralNode>> CreateForbiddenFactory()
+			=> () => throw new UnreachableException();
 
 		sealed class Dummy : LazyStructuralNode
 		{
