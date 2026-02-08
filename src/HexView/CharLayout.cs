@@ -127,9 +127,7 @@ namespace HexView
 
 			if (fromPoint.Y > toPoint.Y)
 			{
-				var tmp = fromPoint;
-				fromPoint = toPoint;
-				toPoint = tmp;
+				(toPoint, fromPoint) = (fromPoint, toPoint);
 			}
 
 			return category switch
@@ -157,9 +155,7 @@ namespace HexView
 
 			if (first == last && fromPoint.X > toPoint.X)
 			{
-				var tmp = fromPoint;
-				fromPoint = toPoint;
-				toPoint = tmp;
+				(toPoint, fromPoint) = (fromPoint, toPoint);
 			}
 
 			first = (first << 4) + GetByteColumn(fromPoint.X, roundLeft: false);
@@ -175,9 +171,7 @@ namespace HexView
 
 			if (first == last && fromPoint.X > toPoint.X)
 			{
-				var tmp = fromPoint;
-				fromPoint = toPoint;
-				toPoint = tmp;
+				(toPoint, fromPoint) = (fromPoint, toPoint);
 			}
 
 			first = (first << 4) + GetCharColumn(fromPoint.X, roundLeft: false);
@@ -313,7 +307,7 @@ namespace HexView
 		// |         | Byte Section                                      | Char Section
 		// xxxxxxxx  xx xx xx xx  xx xx xx xx  xx xx xx xx  xx xx xx xx  xxxx xxxx xxxx xxxx
 		static readonly int[] _baseOffsets =
-		{
+		[
 			1, 1, 1, 1, 1, 1, 1, 3,
 			1, 2, 1, 2, 1, 2, 1, 3,
 			1, 2, 1, 2, 1, 2, 1, 3,
@@ -324,7 +318,7 @@ namespace HexView
 			1, 1, 1, 2,
 			1, 1, 1, 1,
 			0,
-		};
+		];
 
 		sealed class CellSpacing : IList<double>
 		{

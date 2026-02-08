@@ -13,12 +13,12 @@ namespace HexView
 	{
 		static MainWindow()
 		{
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(ApplicationCommands.Close, CloseWindow));
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(ApplicationCommands.Open, OpenFile));
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(Commands.CloseDocument, CloseFile, CanCloseFile));
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(Commands.Goto, GotoOffset));
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(Commands.SelectNode, SelectNode));
-			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(Commands.ShowSelection, ShowSelection));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(ApplicationCommands.Close, CloseWindow));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(ApplicationCommands.Open, OpenFile));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(Commands.CloseDocument, CloseFile, CanCloseFile));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(Commands.Goto, GotoOffset));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(Commands.SelectNode, SelectNode));
+			CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new(Commands.ShowSelection, ShowSelection));
 		}
 
 		public MainWindow()
