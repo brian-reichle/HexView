@@ -19,17 +19,20 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 		[Test]
 		public void SimpleTemplates()
 		{
-			Assert.That(StandardTemplates.Double, Is.InstanceOf<SimpleNodeTemplate<double>>());
-			Assert.That(StandardTemplates.Guid, Is.InstanceOf<SimpleNodeTemplate<Guid>>());
-			Assert.That(StandardTemplates.Int16, Is.InstanceOf<SimpleNodeTemplate<short>>());
-			Assert.That(StandardTemplates.Int32, Is.InstanceOf<SimpleNodeTemplate<int>>());
-			Assert.That(StandardTemplates.Int64, Is.InstanceOf<SimpleNodeTemplate<long>>());
-			Assert.That(StandardTemplates.Int8, Is.InstanceOf<SimpleNodeTemplate<sbyte>>());
-			Assert.That(StandardTemplates.Single, Is.InstanceOf<SimpleNodeTemplate<float>>());
-			Assert.That(StandardTemplates.UInt16, Is.InstanceOf<SimpleNodeTemplate<ushort>>());
-			Assert.That(StandardTemplates.UInt32, Is.InstanceOf<SimpleNodeTemplate<uint>>());
-			Assert.That(StandardTemplates.UInt64, Is.InstanceOf<SimpleNodeTemplate<ulong>>());
-			Assert.That(StandardTemplates.UInt8, Is.InstanceOf<SimpleNodeTemplate<byte>>());
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(StandardTemplates.Double, Is.InstanceOf<SimpleNodeTemplate<double>>());
+				Assert.That(StandardTemplates.Guid, Is.InstanceOf<SimpleNodeTemplate<Guid>>());
+				Assert.That(StandardTemplates.Int16, Is.InstanceOf<SimpleNodeTemplate<short>>());
+				Assert.That(StandardTemplates.Int32, Is.InstanceOf<SimpleNodeTemplate<int>>());
+				Assert.That(StandardTemplates.Int64, Is.InstanceOf<SimpleNodeTemplate<long>>());
+				Assert.That(StandardTemplates.Int8, Is.InstanceOf<SimpleNodeTemplate<sbyte>>());
+				Assert.That(StandardTemplates.Single, Is.InstanceOf<SimpleNodeTemplate<float>>());
+				Assert.That(StandardTemplates.UInt16, Is.InstanceOf<SimpleNodeTemplate<ushort>>());
+				Assert.That(StandardTemplates.UInt32, Is.InstanceOf<SimpleNodeTemplate<uint>>());
+				Assert.That(StandardTemplates.UInt64, Is.InstanceOf<SimpleNodeTemplate<ulong>>());
+				Assert.That(StandardTemplates.UInt8, Is.InstanceOf<SimpleNodeTemplate<byte>>());
+			}
 		}
 
 		[Test]

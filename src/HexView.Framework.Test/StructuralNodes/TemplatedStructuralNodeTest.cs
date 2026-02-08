@@ -27,10 +27,13 @@ namespace HexView.Framework.Test
 
 			var node = new TemplatedStructuralNode(mockData.Object, null, "root", mockTemplate.Object, 100);
 
-			Assert.That(node.Children.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
-			Assert.That(node.Children.Select(x => x.ByteRange!.Offset), Is.EqualTo([100, 104, 108]));
-			Assert.That(node.Children.Select(x => x.ByteRange!.Length), Has.All.EqualTo(4));
-			Assert.That(node.Children.Select(x => x.Parent), Has.All.EqualTo(node));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(node.Children.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+				Assert.That(node.Children.Select(x => x.ByteRange!.Offset), Is.EqualTo([100, 104, 108]));
+				Assert.That(node.Children.Select(x => x.ByteRange!.Length), Has.All.EqualTo(4));
+				Assert.That(node.Children.Select(x => x.Parent), Has.All.EqualTo(node));
+			}
 		}
 
 		[Test]
@@ -49,9 +52,12 @@ namespace HexView.Framework.Test
 				mockTemplate.Object,
 				100);
 
-			Assert.That(node.ByteRange.Offset, Is.EqualTo(100));
-			Assert.That(node.ByteRange.Length, Is.EqualTo(10));
-			Assert.That(node.Children.Count, Is.EqualTo(0));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(node.ByteRange.Offset, Is.EqualTo(100));
+				Assert.That(node.ByteRange.Length, Is.EqualTo(10));
+				Assert.That(node.Children, Is.Empty);
+			}
 		}
 
 		[Test]
