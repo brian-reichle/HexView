@@ -47,6 +47,8 @@ csharp_style_expression_bodied_properties = false:none
 csharp_style_expression_bodied_indexers = false:none
 csharp_style_expression_bodied_accessors = false:none
 
+csharp_style_prefer_primary_constructors = false:none
+
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
@@ -94,6 +96,9 @@ csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_between_query_expression_clauses = true
+
+# There is no need for the directory structure to match the namespace.
+dotnet_diagnostic.IDE0130.severity = none
 
 # CA1859 works against proper encapsulation.
 dotnet_diagnostic.CA1859.severity = none

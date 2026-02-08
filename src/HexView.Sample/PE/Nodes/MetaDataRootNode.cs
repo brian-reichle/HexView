@@ -35,12 +35,12 @@ namespace HexView.Plugins.Sample.PE
 				{ "Streams", StandardTemplates.UInt16 },
 			};
 
-			return new IStructuralNode[]
-			{
+			return
+			[
 				new TemplatedStructuralNode(_provider.Data, this, "Header", headerTemplate, _provider.MetaDataOffset),
 				new StreamHeaderListNode(_provider, this),
 				new StreamListNode(_provider, this),
-			};
+			];
 		}
 
 		readonly PEStructuralNodeProvider _provider;

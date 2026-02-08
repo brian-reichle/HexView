@@ -18,7 +18,7 @@ namespace HexView.Framework
 		}
 
 		public override string Name { get; }
-		public override ByteRange ByteRange => new ByteRange(_offset, _template.Width);
+		public override ByteRange ByteRange => new(_offset, _template.Width);
 		protected override int Count => _template.Components.Count;
 		public override object? Value => _template.GetValue(_data, _offset);
 

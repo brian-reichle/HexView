@@ -27,7 +27,7 @@ namespace HexView.Framework
 		public long Width => _itemCount * _itemWidth;
 		public object? GetValue(IDataSource data, long offset) => null;
 		Component GetComponent(int index) => GetComponent(index, index * _itemWidth);
-		Component GetComponent(int index, long offset) => new Component(_getName(index, offset), _itemTemplate, offset);
+		Component GetComponent(int index, long offset) => new(_getName(index, offset), _itemTemplate, offset);
 
 		IEnumerator<Component> GetEnumerator()
 		{

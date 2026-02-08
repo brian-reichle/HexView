@@ -5,22 +5,22 @@ namespace HexView.Plugins.Sample.PE
 {
 	sealed class CompoundMetaDataTokenColumnDef : MetaDataTokenColumnDef
 	{
-		public static readonly CompoundMetaDataTokenColumnDef TypeDefOrRef = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef TypeDefOrRef = new(
+		[
 			MetaDataTableCodes.TypeDef,
 			MetaDataTableCodes.TypeRef,
 			MetaDataTableCodes.TypeSpec,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef HasConstant = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef HasConstant = new(
+		[
 			MetaDataTableCodes.Field,
 			MetaDataTableCodes.Param,
 			MetaDataTableCodes.Property,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef HasCustomAttribute = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef HasCustomAttribute = new(
+		[
 			MetaDataTableCodes.MethodDef,
 			MetaDataTableCodes.Field,
 			MetaDataTableCodes.TypeRef,
@@ -40,77 +40,77 @@ namespace HexView.Plugins.Sample.PE
 			MetaDataTableCodes.File,
 			MetaDataTableCodes.ExportedType,
 			MetaDataTableCodes.ManifestResource,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef HasFieldMarshall = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef HasFieldMarshall = new(
+		[
 			MetaDataTableCodes.Field,
 			MetaDataTableCodes.Param,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef HasDeclSecurity = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef HasDeclSecurity = new(
+		[
 			MetaDataTableCodes.TypeDef,
 			MetaDataTableCodes.MethodDef,
 			MetaDataTableCodes.Assembly,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef MemberRefParent = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef MemberRefParent = new(
+		[
 			MetaDataTableCodes.TypeDef,
 			MetaDataTableCodes.TypeRef,
 			MetaDataTableCodes.ModuleRef,
 			MetaDataTableCodes.MethodDef,
 			MetaDataTableCodes.TypeSpec,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef HasSemantics = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef HasSemantics = new(
+		[
 			MetaDataTableCodes.Event,
 			MetaDataTableCodes.Property,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef MethodDefOrRef = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef MethodDefOrRef = new(
+		[
 			MetaDataTableCodes.MethodDef,
 			MetaDataTableCodes.MemberRef,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef MemberForwarded = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef MemberForwarded = new(
+		[
 			MetaDataTableCodes.Field,
 			MetaDataTableCodes.MethodDef,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef Implementation = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef Implementation = new(
+		[
 			MetaDataTableCodes.File,
 			MetaDataTableCodes.AssemblyRef,
 			MetaDataTableCodes.ExportedType,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef CustomAttributeType = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef CustomAttributeType = new(
+		[
 			(MetaDataTableCodes)0xFF,
 			(MetaDataTableCodes)0xFF,
 			MetaDataTableCodes.MethodDef,
 			MetaDataTableCodes.MemberRef,
 			(MetaDataTableCodes)0xFF,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef ResolutionScope = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef ResolutionScope = new(
+		[
 			MetaDataTableCodes.Module,
 			MetaDataTableCodes.ModuleRef,
 			MetaDataTableCodes.AssemblyRef,
 			MetaDataTableCodes.TypeRef,
-		});
+		]);
 
-		public static readonly CompoundMetaDataTokenColumnDef TypeOrMethodDef = new CompoundMetaDataTokenColumnDef(new[]
-		{
+		public static readonly CompoundMetaDataTokenColumnDef TypeOrMethodDef = new(
+		[
 			MetaDataTableCodes.TypeDef,
 			MetaDataTableCodes.MethodDef,
-		});
+		]);
 
 		public CompoundMetaDataTokenColumnDef(MetaDataTableCodes[] codes)
 		{

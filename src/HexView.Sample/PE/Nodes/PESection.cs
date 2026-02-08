@@ -15,35 +15,15 @@ namespace HexView.Plugins.Sample.PE
 		}
 
 		public override string Name
-		{
-			get
-			{
-				if (_name == null)
-				{
-					_name = Helper.ReadASCIIStringNode(
-						_provider.Data,
-						_tableReccordOffset + Constants.Section_Name_Offset,
-						Constants.Section_Name_Length);
-				}
-
-				return _name;
-			}
-		}
+			=> _name ??= Helper.ReadASCIIStringNode(
+				_provider.Data,
+				_tableReccordOffset + Constants.Section_Name_Offset,
+				Constants.Section_Name_Length);
 
 		public override ByteRange ByteRange
-		{
-			get
-			{
-				if (_byteRange == null)
-				{
-					_byteRange = new ByteRange(
-						_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_PointerToRawData_Offset),
-						_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_SizeOfRawData_Offset));
-				}
-
-				return _byteRange;
-			}
-		}
+			=> _byteRange ??= new ByteRange(
+				_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_PointerToRawData_Offset),
+				_provider.Data.Read<int>(_tableReccordOffset + Constants.Section_SizeOfRawData_Offset));
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{
@@ -71,7 +51,7 @@ namespace HexView.Plugins.Sample.PE
 				directoryOffset += Constants.Directory_Length;
 			}
 
-			return list.ToArray();
+			return [.. list];
 		}
 
 		IStructuralNode NewSectionNode(int dictionaryIndex, int fileOffset, int fileLength)

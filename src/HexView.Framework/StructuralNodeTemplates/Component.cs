@@ -4,7 +4,7 @@ using System;
 #pragma warning disable CA1815
 namespace HexView.Framework
 {
-	public struct Component
+	public readonly struct Component
 	{
 		public Component(string name, IStructuralNodeTemplate template, long offset)
 		{

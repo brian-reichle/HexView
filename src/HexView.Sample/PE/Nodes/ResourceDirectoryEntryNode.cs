@@ -45,7 +45,7 @@ namespace HexView.Plugins.Sample.PE
 			}
 		}
 
-		public override ByteRange ByteRange => new ByteRange(_offset, 8);
+		public override ByteRange ByteRange => new(_offset, 8);
 
 		protected override IList<IStructuralNode> CreateChildNodes()
 		{
@@ -58,12 +58,12 @@ namespace HexView.Plugins.Sample.PE
 
 			if ((id & IsDirectoryFlag) != 0)
 			{
-				return new IStructuralNode[]
-				{
+				return
+				[
 					keyNode,
 					new TemplatedStructuralNode(_provider.Data, this, "Subdirectory RVA", StandardTemplates.Int32, _offset + 4),
 					new ResourceDirectoryNode(_provider, this, _resourceBase, rvaTarget, _depth + 1),
-				};
+				];
 			}
 			else
 			{
@@ -72,13 +72,13 @@ namespace HexView.Plugins.Sample.PE
 
 				var dataFilePos = _provider.MapRVAtoFile(dataRVA);
 
-				return new IStructuralNode[]
-				{
+				return
+				[
 					keyNode,
 					new TemplatedStructuralNode(_provider.Data, this, "Data Entry RVA", StandardTemplates.Int32, _offset + 4),
 					new TemplatedStructuralNode(_provider.Data, this, "Data Entry", PETemplates.ResourceDataEntry, rvaTarget),
 					new TemplatedStructuralNode(_provider.Data, this, "Data", StandardTemplates.Blob(dataSize), dataFilePos),
-				};
+				];
 			}
 		}
 

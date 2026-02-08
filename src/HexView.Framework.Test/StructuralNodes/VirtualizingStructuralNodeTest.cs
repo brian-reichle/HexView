@@ -50,14 +50,14 @@ namespace HexView.Framework.Test
 		[Test]
 		public void DontHoldAReferenceToChildren()
 		{
-			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, (int index) => CreateChild(0));
+			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, index => CreateChild(0));
 			var weakChild = GetWeakItem(node, 0);
 
 			GC.Collect();
 			Assert.That(weakChild.TryGetTarget(out _), Is.False);
 		}
 
-		static Dummy CreateChild(int index) => new Dummy(
+		static Dummy CreateChild(int index) => new(
 			null,
 			"<child" + index + ">",
 			new ByteRange(100 + index * 25, 25),
@@ -65,7 +65,7 @@ namespace HexView.Framework.Test
 			x => throw new InvalidOperationException());
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		static WeakReference<IStructuralNode> GetWeakItem(IStructuralNode parent, int index) => new WeakReference<IStructuralNode>(parent.Children[index]);
+		static WeakReference<IStructuralNode> GetWeakItem(IStructuralNode parent, int index) => new(parent.Children[index]);
 
 		sealed class Dummy : VirtualizingStructuralNode
 		{

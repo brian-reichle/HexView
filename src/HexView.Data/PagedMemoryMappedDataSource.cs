@@ -130,7 +130,7 @@ namespace HexView.Data
 		readonly MemoryMappedFile _file;
 		readonly LinkedList<PageData> _mru;
 
-		struct PageData
+		readonly struct PageData
 		{
 			public PageData(long baseAddress, MemoryMappedViewAccessor accessor)
 			{

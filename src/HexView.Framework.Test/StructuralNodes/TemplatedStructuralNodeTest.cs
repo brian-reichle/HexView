@@ -1,6 +1,4 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NUnit.Framework;
@@ -20,17 +18,17 @@ namespace HexView.Framework.Test
 
 			var mockTemplate = new Mock<IStructuralNodeTemplate>(MockBehavior.Strict);
 			mockTemplate.Setup(x => x.Width).Returns(12);
-			mockTemplate.Setup(x => x.Components).Returns(new[]
-			{
+			mockTemplate.Setup(x => x.Components).Returns(
+			[
 				new Component("A", mockChildTemplate.Object, 0),
 				new Component("B", mockChildTemplate.Object, 4),
 				new Component("C", mockChildTemplate.Object, 8),
-			});
+			]);
 
 			var node = new TemplatedStructuralNode(mockData.Object, null, "root", mockTemplate.Object, 100);
 
-			Assert.That(node.Children.Select(x => x.Name), Is.EqualTo(new[] { "A", "B", "C" }));
-			Assert.That(node.Children.Select(x => x.ByteRange!.Offset), Is.EqualTo(new[] { 100, 104, 108 }));
+			Assert.That(node.Children.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+			Assert.That(node.Children.Select(x => x.ByteRange!.Offset), Is.EqualTo([100, 104, 108]));
 			Assert.That(node.Children.Select(x => x.ByteRange!.Length), Has.All.EqualTo(4));
 			Assert.That(node.Children.Select(x => x.Parent), Has.All.EqualTo(node));
 		}
@@ -42,7 +40,7 @@ namespace HexView.Framework.Test
 
 			var mockTemplate = new Mock<IStructuralNodeTemplate>(MockBehavior.Strict);
 			mockTemplate.Setup(x => x.Width).Returns(10);
-			mockTemplate.Setup(x => x.Components).Returns(Array.Empty<Component>());
+			mockTemplate.Setup(x => x.Components).Returns([]);
 
 			var node = new TemplatedStructuralNode(
 				mockData.Object,
