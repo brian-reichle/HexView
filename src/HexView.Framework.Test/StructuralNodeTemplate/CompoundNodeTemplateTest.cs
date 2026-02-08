@@ -27,10 +27,13 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 				{ "C", mockChild3.Object },
 			};
 
-			Assert.That(template.Width, Is.EqualTo(8));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 6]));
-			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object, mockChild3.Object]));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.EqualTo(8));
+				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 6]));
+				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object, mockChild3.Object]));
+			}
 		}
 
 		[Test]
@@ -52,10 +55,13 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 				{ PositionMode.RelativeToLast, 2, "C", mockChild3.Object },
 			};
 
-			Assert.That(template.Width, Is.EqualTo(22));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 16, 20]));
-			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object, mockChild3.Object]));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.EqualTo(22));
+				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 16, 20]));
+				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object, mockChild3.Object]));
+			}
 		}
 
 		[Test]
@@ -75,10 +81,13 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 
 			template.RoundWidthUpToBoundary(4);
 
-			Assert.That(template.Width, Is.EqualTo(8));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B"]));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 1]));
-			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object]));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.EqualTo(8));
+				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B"]));
+				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 1]));
+				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object, mockChild2.Object]));
+			}
 		}
 
 		[Test]
@@ -94,10 +103,13 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 
 			template.OverrideWidth(4);
 
-			Assert.That(template.Width, Is.EqualTo(4));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A"]));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0]));
-			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object]));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.EqualTo(4));
+				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A"]));
+				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0]));
+				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([mockChild1.Object]));
+			}
 		}
 
 		[Test]

@@ -66,7 +66,8 @@ namespace HexView.Framework.Test
 				.Setup(x => x())
 				.Returns(() => children);
 
-			Assert.That(node.Children, Is.SameAs(node.Children));
+			var resultChildren = node.Children;
+			Assert.That(node.Children, Is.SameAs(resultChildren), "Second call to node.Children should have returned the same collection.");
 
 			mockFactory.Verify(x => x(), Times.Once);
 		}

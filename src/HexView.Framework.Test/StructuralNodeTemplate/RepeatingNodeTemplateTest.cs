@@ -22,11 +22,13 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 				5,
 				(index, offset) => "(" + index + ", " + offset + ")");
 
-			Assert.That(template.Width, Is.EqualTo(20));
-			Assert.That(template.Components.Count, Is.EqualTo(5));
-			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["(0, 0)", "(1, 4)", "(2, 8)", "(3, 12)", "(4, 16)"]));
-			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 8, 12, 16]));
-			Assert.That(template.Components.Select(x => x.Template), Has.All.EqualTo(mockChild.Object));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.EqualTo(20));
+				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["(0, 0)", "(1, 4)", "(2, 8)", "(3, 12)", "(4, 16)"]));
+				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 8, 12, 16]));
+				Assert.That(template.Components.Select(x => x.Template), Has.All.EqualTo(mockChild.Object));
+			}
 		}
 
 		[Test]
@@ -42,8 +44,11 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 				0,
 				(index, offset) => throw new InvalidOperationException());
 
-			Assert.That(template.Width, Is.EqualTo(0));
-			Assert.That(template.Components, Is.Empty);
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(template.Width, Is.Zero);
+				Assert.That(template.Components, Is.Empty);
+			}
 		}
 
 		[Test]

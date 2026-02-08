@@ -16,7 +16,7 @@ namespace HexView.Framework.Test
 			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
 			var children = node.Children;
 
-			Assert.That(children.Count, Is.EqualTo(2));
+			Assert.That(children, Has.Count.EqualTo(2));
 
 			mockFactory
 				.Setup(x => x(1))
@@ -38,13 +38,14 @@ namespace HexView.Framework.Test
 			var node = new Dummy(null, "<name>", new ByteRange(100, 50), 2, mockFactory.Object);
 			var children = node.Children;
 
-			Assert.That(children.Count, Is.EqualTo(2));
+			Assert.That(children, Has.Count.EqualTo(2));
 
 			mockFactory
 				.Setup(x => x(0))
 				.Returns((int index) => CreateChild(1));
 
-			Assert.That(children[0], Is.Not.SameAs(children[0]));
+			var firstChild = children[0];
+			Assert.That(children[0], Is.Not.SameAs(firstChild), "Should have created a new instance.");
 		}
 
 		[Test]

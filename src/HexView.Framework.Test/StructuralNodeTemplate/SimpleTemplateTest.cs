@@ -9,9 +9,12 @@ namespace HexView.Framework.Test.StructuralNodeTemplate
 		[Test]
 		public void Width()
 		{
-			Assert.That(new SimpleNodeTemplate<int>().Width, Is.EqualTo(4));
-			Assert.That(new SimpleNodeTemplate<long>().Width, Is.EqualTo(8));
-			Assert.That(new SimpleNodeTemplate<Foo>().Width, Is.EqualTo(2));
+			using (Assert.EnterMultipleScope())
+			{
+				Assert.That(new SimpleNodeTemplate<int>().Width, Is.EqualTo(4));
+				Assert.That(new SimpleNodeTemplate<long>().Width, Is.EqualTo(8));
+				Assert.That(new SimpleNodeTemplate<Foo>().Width, Is.EqualTo(2));
+			}
 		}
 
 		[Test]
