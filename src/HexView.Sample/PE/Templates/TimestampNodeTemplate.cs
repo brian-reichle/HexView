@@ -3,26 +3,25 @@ using System;
 using System.Collections.Generic;
 using HexView.Framework;
 
-namespace HexView.Plugins.Sample.PE
+namespace HexView.Plugins.Sample.PE;
+
+// Date time format specifically used by the PE header. (seconds since 1970-01-01 00:00 or 0).
+sealed class TimestampNodeTemplate : IStructuralNodeTemplate
 {
-	// Date time format specifically used by the PE header. (seconds since 1970-01-01 00:00 or 0).
-	sealed class TimestampNodeTemplate : IStructuralNodeTemplate
+	public static readonly TimestampNodeTemplate DateTime = new TimestampNodeTemplate();
+
+	TimestampNodeTemplate()
 	{
-		public static readonly TimestampNodeTemplate DateTime = new TimestampNodeTemplate();
-
-		TimestampNodeTemplate()
-		{
-		}
-
-		public long Width => 4;
-		public IReadOnlyList<Component> Components => Array.Empty<Component>();
-
-		public object? GetValue(IDataSource data, long offset)
-		{
-			var value = data.Read<uint>(offset);
-			return value == 0 ? null : Epoch.AddSeconds(value);
-		}
-
-		static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 	}
+
+	public long Width => 4;
+	public IReadOnlyList<Component> Components => Array.Empty<Component>();
+
+	public object? GetValue(IDataSource data, long offset)
+	{
+		var value = data.Read<uint>(offset);
+		return value == 0 ? null : Epoch.AddSeconds(value);
+	}
+
+	static readonly DateTime Epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 }

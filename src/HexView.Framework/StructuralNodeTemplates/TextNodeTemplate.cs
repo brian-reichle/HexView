@@ -4,25 +4,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace HexView.Framework
+namespace HexView.Framework;
+
+sealed class TextNodeTemplate : IStructuralNodeTemplate
 {
-	sealed class TextNodeTemplate : IStructuralNodeTemplate
+	public TextNodeTemplate(int width, Encoding encoding)
 	{
-		public TextNodeTemplate(int width, Encoding encoding)
-		{
-			ArgumentNullException.ThrowIfNull(encoding);
+		ArgumentNullException.ThrowIfNull(encoding);
 
-			_width = width;
-			_encoding = encoding;
-		}
-
-		public long Width => _width;
-		public IReadOnlyList<Component> Components => [];
-		public object? GetValue(IDataSource data, long offset) => data.ReadText(offset, _width, _encoding);
-
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		readonly int _width;
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		readonly Encoding _encoding;
+		_width = width;
+		_encoding = encoding;
 	}
+
+	public long Width => _width;
+	public IReadOnlyList<Component> Components => [];
+	public object? GetValue(IDataSource data, long offset) => data.ReadText(offset, _width, _encoding);
+
+	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+	readonly int _width;
+	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+	readonly Encoding _encoding;
 }

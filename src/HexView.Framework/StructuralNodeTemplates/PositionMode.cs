@@ -1,9 +1,8 @@
 // Copyright (c) Brian Reichle.  All Rights Reserved.  Licensed under the MIT License.  See License.txt in the project root for license information.
-namespace HexView.Framework
+namespace HexView.Framework;
+
+public enum PositionMode
 {
-	public enum PositionMode
-	{
-		RelativeToParent,
-		RelativeToLast,
-	}
+	RelativeToParent,
+	RelativeToLast,
 }

@@ -2,22 +2,21 @@
 using System;
 
 #pragma warning disable CA1815
-namespace HexView.Framework
+namespace HexView.Framework;
+
+public readonly struct Component
 {
-	public readonly struct Component
+	public Component(string name, IStructuralNodeTemplate template, long offset)
 	{
-		public Component(string name, IStructuralNodeTemplate template, long offset)
-		{
-			ArgumentNullException.ThrowIfNull(template);
+		ArgumentNullException.ThrowIfNull(template);
 
-			Name = name;
-			Template = template;
-			Offset = offset;
-		}
-
-		public string Name { get; }
-		public IStructuralNodeTemplate Template { get; }
-		public long Offset { get; }
+		Name = name;
+		Template = template;
+		Offset = offset;
 	}
+
+	public string Name { get; }
+	public IStructuralNodeTemplate Template { get; }
+	public long Offset { get; }
 }
 #pragma warning restore CA1815

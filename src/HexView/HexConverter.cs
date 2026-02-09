@@ -3,33 +3,32 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace HexView
+namespace HexView;
+
+[ValueConversion(typeof(long?), typeof(string))]
+sealed class HexConverter : IValueConverter
 {
-	[ValueConversion(typeof(long?), typeof(string))]
-	sealed class HexConverter : IValueConverter
+	public static HexConverter Default { get; } = new HexConverter();
+
+	public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
 	{
-		public static HexConverter Default { get; } = new HexConverter();
+		var longValue = (long?)value;
 
-		public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+		if (longValue.HasValue)
 		{
-			var longValue = (long?)value;
-
-			if (longValue.HasValue)
-			{
-				return longValue.Value.ToString("X", CultureInfo.InvariantCulture);
-			}
-
-			return null;
+			return longValue.Value.ToString("X", CultureInfo.InvariantCulture);
 		}
 
-		public object? ConvertBack(object? value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if (value != null)
-			{
-				return HexHelper.Parse((string)value);
-			}
+		return null;
+	}
 
-			return null;
+	public object? ConvertBack(object? value, Type targetType, object parameter, CultureInfo culture)
+	{
+		if (value != null)
+		{
+			return HexHelper.Parse((string)value);
 		}
+
+		return null;
 	}
 }

@@ -6,10 +6,9 @@ using HexView.Plugins.Sample.PE;
 
 [assembly: Plugin(typeof(SamplePlugin))]
 
-namespace HexView.Plugins.Sample
+namespace HexView.Plugins.Sample;
+
+public sealed class SamplePlugin : IPlugin
 {
-	public sealed class SamplePlugin : IPlugin
-	{
-		public IEnumerable<IFormatReader> Readers => new[] { new PEFormatReader() };
-	}
+	public IEnumerable<IFormatReader> Readers => new[] { new PEFormatReader() };
 }

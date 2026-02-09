@@ -2,13 +2,12 @@
 using System;
 using System.Text;
 
-namespace HexView.Framework
-{
-	public interface IDataSource
-	{
-		long ByteCount { get; }
+namespace HexView.Framework;
 
-		void CopyTo(long offset, Span<byte> buffer);
-		string ReadText(long offset, int length, Encoding encoding);
-	}
+public interface IDataSource
+{
+	long ByteCount { get; }
+
+	void CopyTo(long offset, Span<byte> buffer);
+	string ReadText(long offset, int length, Encoding encoding);
 }
