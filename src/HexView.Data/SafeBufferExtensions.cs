@@ -2,15 +2,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace HexView.Data
+namespace HexView.Data;
+
+static class SafeBufferExtensions
 {
-	static class SafeBufferExtensions
+	public static unsafe Span<byte> AsSpan(this SafeBuffer buffer)
 	{
-		public static unsafe Span<byte> AsSpan(this SafeBuffer buffer)
-		{
-			return new Span<byte>(
-				(void*)buffer.DangerousGetHandle(),
-				(int)buffer.ByteLength);
-		}
+		return new Span<byte>(
+			(void*)buffer.DangerousGetHandle(),
+			(int)buffer.ByteLength);
 	}
 }

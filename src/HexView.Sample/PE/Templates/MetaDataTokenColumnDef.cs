@@ -3,55 +3,54 @@ using System;
 using System.Collections.Generic;
 using HexView.Framework;
 
-namespace HexView.Plugins.Sample.PE
+namespace HexView.Plugins.Sample.PE;
+
+abstract class MetaDataTokenColumnDef
 {
-	abstract class MetaDataTokenColumnDef
+	public IStructuralNodeTemplate ShortForm => _shortForm ??= new ShortFormTemplate(this);
+	public IStructuralNodeTemplate LongForm => _longForm ??= new LongFormTemplate(this);
+
+	public abstract IStructuralNodeTemplate SelectTemplate(MetaDataTableStatistics statistics);
+	protected abstract int Decode(int rawValue);
+
+	protected static int RequiredBits(int possibleValues)
 	{
-		public IStructuralNodeTemplate ShortForm => _shortForm ??= new ShortFormTemplate(this);
-		public IStructuralNodeTemplate LongForm => _longForm ??= new LongFormTemplate(this);
+		if (possibleValues == 0) return 0;
 
-		public abstract IStructuralNodeTemplate SelectTemplate(MetaDataTableStatistics statistics);
-		protected abstract int Decode(int rawValue);
+		var count = 0;
+		possibleValues--;
 
-		protected static int RequiredBits(int possibleValues)
+		while (possibleValues > 0)
 		{
-			if (possibleValues == 0) return 0;
-
-			var count = 0;
-			possibleValues--;
-
-			while (possibleValues > 0)
-			{
-				count++;
-				possibleValues >>= 1;
-			}
-
-			return count;
+			count++;
+			possibleValues >>= 1;
 		}
 
-		IStructuralNodeTemplate? _shortForm;
-		IStructuralNodeTemplate? _longForm;
+		return count;
+	}
 
-		sealed class LongFormTemplate : IStructuralNodeTemplate
-		{
-			public LongFormTemplate(MetaDataTokenColumnDef def) => _def = def;
+	IStructuralNodeTemplate? _shortForm;
+	IStructuralNodeTemplate? _longForm;
 
-			long IStructuralNodeTemplate.Width => 4;
-			object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<int>(offset));
-			IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
+	sealed class LongFormTemplate : IStructuralNodeTemplate
+	{
+		public LongFormTemplate(MetaDataTokenColumnDef def) => _def = def;
 
-			readonly MetaDataTokenColumnDef _def;
-		}
+		long IStructuralNodeTemplate.Width => 4;
+		object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<int>(offset));
+		IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
 
-		sealed class ShortFormTemplate : IStructuralNodeTemplate
-		{
-			public ShortFormTemplate(MetaDataTokenColumnDef def) => _def = def;
+		readonly MetaDataTokenColumnDef _def;
+	}
 
-			long IStructuralNodeTemplate.Width => 2;
-			object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<ushort>(offset));
-			IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
+	sealed class ShortFormTemplate : IStructuralNodeTemplate
+	{
+		public ShortFormTemplate(MetaDataTokenColumnDef def) => _def = def;
 
-			readonly MetaDataTokenColumnDef _def;
-		}
+		long IStructuralNodeTemplate.Width => 2;
+		object IStructuralNodeTemplate.GetValue(IDataSource data, long offset) => _def.Decode(data.Read<ushort>(offset));
+		IReadOnlyList<Component> IStructuralNodeTemplate.Components => Array.Empty<Component>();
+
+		readonly MetaDataTokenColumnDef _def;
 	}
 }

@@ -3,18 +3,17 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace HexView.Framework
-{
-	public static class DataSourceExtensions
-	{
-		public static T Read<T>(this IDataSource source, long offset)
-			where T : unmanaged
-		{
-			ArgumentNullException.ThrowIfNull(source);
+namespace HexView.Framework;
 
-			var value = default(T);
-			source.CopyTo(offset, MemoryMarshal.AsBytes(MemoryMarshal.CreateSpan(ref value, 1)));
-			return value;
-		}
+public static class DataSourceExtensions
+{
+	public static T Read<T>(this IDataSource source, long offset)
+		where T : unmanaged
+	{
+		ArgumentNullException.ThrowIfNull(source);
+
+		var value = default(T);
+		source.CopyTo(offset, MemoryMarshal.AsBytes(MemoryMarshal.CreateSpan(ref value, 1)));
+		return value;
 	}
 }

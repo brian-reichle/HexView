@@ -2,114 +2,113 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace HexView.Framework.Test.StructuralNodeTemplate
+namespace HexView.Framework.Test.StructuralNodeTemplate;
+
+[TestFixture]
+class CompoundNodeTemplateTest
 {
-	[TestFixture]
-	class CompoundNodeTemplateTest
+	[Test]
+	public void Children()
 	{
-		[Test]
-		public void Children()
+		var child1 = new DummySimpleTemplate(4);
+		var child2 = new DummySimpleTemplate(2);
+		var child3 = new DummySimpleTemplate(2);
+
+		var template = new CompoundNodeTemplate()
 		{
-			var child1 = new DummySimpleTemplate(4);
-			var child2 = new DummySimpleTemplate(2);
-			var child3 = new DummySimpleTemplate(2);
+			{ "A", child1 },
+			{ "B", child2 },
+			{ "C", child3 },
+		};
 
-			var template = new CompoundNodeTemplate()
-			{
-				{ "A", child1 },
-				{ "B", child2 },
-				{ "C", child3 },
-			};
-
-			using (Assert.EnterMultipleScope())
-			{
-				Assert.That(template.Width, Is.EqualTo(8));
-				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
-				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 6]));
-				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2, child3]));
-			}
-		}
-
-		[Test]
-		public void PositionOverride()
+		using (Assert.EnterMultipleScope())
 		{
-			var child1 = new DummySimpleTemplate(4);
-			var child2 = new DummySimpleTemplate(2);
-			var child3 = new DummySimpleTemplate(2);
-
-			var template = new CompoundNodeTemplate()
-			{
-				{ "A", child1 },
-				{ PositionMode.RelativeToParent, 16, "B", child2 },
-				{ PositionMode.RelativeToLast, 2, "C", child3 },
-			};
-
-			using (Assert.EnterMultipleScope())
-			{
-				Assert.That(template.Width, Is.EqualTo(22));
-				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
-				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 16, 20]));
-				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2, child3]));
-			}
+			Assert.That(template.Width, Is.EqualTo(8));
+			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 4, 6]));
+			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2, child3]));
 		}
+	}
 
-		[Test]
-		public void RoundToMultiple()
+	[Test]
+	public void PositionOverride()
+	{
+		var child1 = new DummySimpleTemplate(4);
+		var child2 = new DummySimpleTemplate(2);
+		var child3 = new DummySimpleTemplate(2);
+
+		var template = new CompoundNodeTemplate()
 		{
-			var child1 = new DummySimpleTemplate(1);
-			var child2 = new DummySimpleTemplate(4);
+			{ "A", child1 },
+			{ PositionMode.RelativeToParent, 16, "B", child2 },
+			{ PositionMode.RelativeToLast, 2, "C", child3 },
+		};
 
-			var template = new CompoundNodeTemplate()
-			{
-				{ "A", child1 },
-				{ "B", child2 },
-			};
-
-			template.RoundWidthUpToBoundary(4);
-
-			using (Assert.EnterMultipleScope())
-			{
-				Assert.That(template.Width, Is.EqualTo(8));
-				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B"]));
-				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 1]));
-				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2]));
-			}
-		}
-
-		[Test]
-		public void OverrideWidth()
+		using (Assert.EnterMultipleScope())
 		{
-			var child1 = new DummySimpleTemplate(1);
-
-			var template = new CompoundNodeTemplate()
-			{
-				{ "A", child1 },
-			};
-
-			template.OverrideWidth(4);
-
-			using (Assert.EnterMultipleScope())
-			{
-				Assert.That(template.Width, Is.EqualTo(4));
-				Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A"]));
-				Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0]));
-				Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1]));
-			}
+			Assert.That(template.Width, Is.EqualTo(22));
+			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B", "C"]));
+			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 16, 20]));
+			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2, child3]));
 		}
+	}
 
-		[Test]
-		public void GetValue()
+	[Test]
+	public void RoundToMultiple()
+	{
+		var child1 = new DummySimpleTemplate(1);
+		var child2 = new DummySimpleTemplate(4);
+
+		var template = new CompoundNodeTemplate()
 		{
-			var data = new DummyDataSource(200);
+			{ "A", child1 },
+			{ "B", child2 },
+		};
 
-			var template = new CompoundNodeTemplate()
-			{
-				{ "A", new DummySimpleTemplate(1) },
-			};
+		template.RoundWidthUpToBoundary(4);
 
-			template.OverrideWidth(4);
-
-			Assert.That(template.GetValue(data, 100), Is.Null);
+		using (Assert.EnterMultipleScope())
+		{
+			Assert.That(template.Width, Is.EqualTo(8));
+			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A", "B"]));
+			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0, 1]));
+			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1, child2]));
 		}
+	}
+
+	[Test]
+	public void OverrideWidth()
+	{
+		var child1 = new DummySimpleTemplate(1);
+
+		var template = new CompoundNodeTemplate()
+		{
+			{ "A", child1 },
+		};
+
+		template.OverrideWidth(4);
+
+		using (Assert.EnterMultipleScope())
+		{
+			Assert.That(template.Width, Is.EqualTo(4));
+			Assert.That(template.Components.Select(x => x.Name), Is.EqualTo(["A"]));
+			Assert.That(template.Components.Select(x => x.Offset), Is.EqualTo([0]));
+			Assert.That(template.Components.Select(x => x.Template), Is.EqualTo([child1]));
+		}
+	}
+
+	[Test]
+	public void GetValue()
+	{
+		var data = new DummyDataSource(200);
+
+		var template = new CompoundNodeTemplate()
+		{
+			{ "A", new DummySimpleTemplate(1) },
+		};
+
+		template.OverrideWidth(4);
+
+		Assert.That(template.GetValue(data, 100), Is.Null);
 	}
 }

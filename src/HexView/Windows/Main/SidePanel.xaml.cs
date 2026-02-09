@@ -3,16 +3,15 @@ using System.Windows;
 using System.Windows.Controls;
 using HexView.Framework;
 
-namespace HexView
-{
-	sealed partial class SidePanel : UserControl
-	{
-		public SidePanel()
-		{
-			InitializeComponent();
-		}
+namespace HexView;
 
-		void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-			=> Commands.SelectNode.Execute(e.NewValue as IStructuralNode, this);
+sealed partial class SidePanel : UserControl
+{
+	public SidePanel()
+	{
+		InitializeComponent();
 	}
+
+	void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+		=> Commands.SelectNode.Execute(e.NewValue as IStructuralNode, this);
 }

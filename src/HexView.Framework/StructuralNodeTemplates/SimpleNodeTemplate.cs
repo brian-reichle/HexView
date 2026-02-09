@@ -3,25 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace HexView.Framework
+namespace HexView.Framework;
+
+sealed class SimpleNodeTemplate<T> : IStructuralNodeTemplate
+	where T : unmanaged
 {
-	sealed class SimpleNodeTemplate<T> : IStructuralNodeTemplate
-		where T : unmanaged
+	public SimpleNodeTemplate()
 	{
-		public SimpleNodeTemplate()
+		var type = typeof(T);
+
+		if (type.IsEnum)
 		{
-			var type = typeof(T);
-
-			if (type.IsEnum)
-			{
-				type = Enum.GetUnderlyingType(type);
-			}
-
-			Width = Marshal.SizeOf(type);
+			type = Enum.GetUnderlyingType(type);
 		}
 
-		public long Width { get; }
-		public IReadOnlyList<Component> Components => [];
-		public object? GetValue(IDataSource data, long offset) => data.Read<T>(offset);
+		Width = Marshal.SizeOf(type);
 	}
+
+	public long Width { get; }
+	public IReadOnlyList<Component> Components => [];
+	public object? GetValue(IDataSource data, long offset) => data.Read<T>(offset);
 }

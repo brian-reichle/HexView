@@ -5,41 +5,40 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace HexView
+namespace HexView;
+
+static class PendingChangeFlush
 {
-	static class PendingChangeFlush
+	public static readonly RoutedEvent FlushRequestEvent = EventManager.RegisterRoutedEvent(
+		"FlushRequest",
+		RoutingStrategy.Bubble,
+		typeof(RoutedEventHandler),
+		typeof(PendingChangeFlush));
+
+	static PendingChangeFlush()
 	{
-		public static readonly RoutedEvent FlushRequestEvent = EventManager.RegisterRoutedEvent(
-			"FlushRequest",
-			RoutingStrategy.Bubble,
-			typeof(RoutedEventHandler),
-			typeof(PendingChangeFlush));
+		EventManager.RegisterClassHandler(typeof(TextBox), FlushRequestEvent, (RoutedEventHandler)FlushTextBox);
+	}
 
-		static PendingChangeFlush()
+	public static void Flush()
+	{
+		if (InputManager.Current.PrimaryKeyboardDevice.FocusedElement is FrameworkElement element)
 		{
-			EventManager.RegisterClassHandler(typeof(TextBox), FlushRequestEvent, (RoutedEventHandler)FlushTextBox);
+			Flush(element);
 		}
+	}
 
-		public static void Flush()
-		{
-			if (InputManager.Current.PrimaryKeyboardDevice.FocusedElement is FrameworkElement element)
-			{
-				Flush(element);
-			}
-		}
+	public static void Flush(FrameworkElement element)
+	{
+		ArgumentNullException.ThrowIfNull(element);
+		element.RaiseEvent(new RoutedEventArgs(FlushRequestEvent));
+	}
 
-		public static void Flush(FrameworkElement element)
-		{
-			ArgumentNullException.ThrowIfNull(element);
-			element.RaiseEvent(new RoutedEventArgs(FlushRequestEvent));
-		}
+	static void FlushTextBox(object sender, RoutedEventArgs e)
+	{
+		var textBox = (TextBox)sender;
+		var binding = BindingOperations.GetBindingExpression(textBox, TextBox.TextProperty);
 
-		static void FlushTextBox(object sender, RoutedEventArgs e)
-		{
-			var textBox = (TextBox)sender;
-			var binding = BindingOperations.GetBindingExpression(textBox, TextBox.TextProperty);
-
-			binding?.UpdateSource();
-		}
+		binding?.UpdateSource();
 	}
 }

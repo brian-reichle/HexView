@@ -2,35 +2,34 @@
 using System.Text;
 using NUnit.Framework;
 
-namespace HexView.Framework.Test.StructuralNodeTemplate
+namespace HexView.Framework.Test.StructuralNodeTemplate;
+
+[TestFixture]
+class TextNodeTemplateTest
 {
-	[TestFixture]
-	class TextNodeTemplateTest
+	[Test]
+	public void Width()
 	{
-		[Test]
-		public void Width()
-		{
-			var template = new TextNodeTemplate(42, Encoding.UTF8);
-			Assert.That(template.Width, Is.EqualTo(42));
-		}
+		var template = new TextNodeTemplate(42, Encoding.UTF8);
+		Assert.That(template.Width, Is.EqualTo(42));
+	}
 
-		[Test]
-		public void Components()
-		{
-			var template = new TextNodeTemplate(42, Encoding.UTF8);
-			Assert.That(template.Components, Is.Empty);
-		}
+	[Test]
+	public void Components()
+	{
+		var template = new TextNodeTemplate(42, Encoding.UTF8);
+		Assert.That(template.Components, Is.Empty);
+	}
 
-		[Test]
-		public void GetValue()
-		{
-			const string Text = "<enter-witty-remark-here>";
-			var data = Encoding.UTF8.GetBytes(Text);
-			var dummyData = new DummyDataSource(200);
-			dummyData.Set(100, data);
+	[Test]
+	public void GetValue()
+	{
+		const string Text = "<enter-witty-remark-here>";
+		var data = Encoding.UTF8.GetBytes(Text);
+		var dummyData = new DummyDataSource(200);
+		dummyData.Set(100, data);
 
-			var template = new TextNodeTemplate(data.Length, Encoding.UTF8);
-			Assert.That(template.GetValue(dummyData, 100), Is.EqualTo(Text));
-		}
+		var template = new TextNodeTemplate(data.Length, Encoding.UTF8);
+		Assert.That(template.GetValue(dummyData, 100), Is.EqualTo(Text));
 	}
 }

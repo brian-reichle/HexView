@@ -6,140 +6,139 @@ using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
 using System.Text;
 
-namespace HexView.Data
+namespace HexView.Data;
+
+[DebuggerDisplay("Count = {ByteCount}")]
+sealed class PagedMemoryMappedDataSource : DataSource
 {
-	[DebuggerDisplay("Count = {ByteCount}")]
-	sealed class PagedMemoryMappedDataSource : DataSource
+	const long PageSize = 0x10000;
+	const long AccessorOffsetMask = 0xFFFF;
+	const long AccessorPageMask = ~AccessorOffsetMask;
+
+	public PagedMemoryMappedDataSource(MemoryMappedFile file, long length)
 	{
-		const long PageSize = 0x10000;
-		const long AccessorOffsetMask = 0xFFFF;
-		const long AccessorPageMask = ~AccessorOffsetMask;
+		_length = length;
+		_file = file;
+		_mru = new LinkedList<PageData>();
+	}
 
-		public PagedMemoryMappedDataSource(MemoryMappedFile file, long length)
+	public override long ByteCount => _length;
+
+	public override void CopyTo(long offset, Span<byte> buffer)
+	{
+		while (buffer.Length > 0)
 		{
-			_length = length;
-			_file = file;
-			_mru = new LinkedList<PageData>();
-		}
+			var accessor = GetAccessor(offset);
+			var span = accessor.SafeMemoryMappedViewHandle.AsSpan().Slice((int)(offset & AccessorOffsetMask));
 
-		public override long ByteCount => _length;
-
-		public override void CopyTo(long offset, Span<byte> buffer)
-		{
-			while (buffer.Length > 0)
+			if (span.Length >= buffer.Length)
 			{
-				var accessor = GetAccessor(offset);
-				var span = accessor.SafeMemoryMappedViewHandle.AsSpan().Slice((int)(offset & AccessorOffsetMask));
-
-				if (span.Length >= buffer.Length)
-				{
-					span = span.Slice(0, buffer.Length);
-				}
-
-				span.CopyTo(buffer);
-				buffer = buffer.Slice(span.Length);
-				offset += span.Length;
-			}
-		}
-
-		public override string ReadText(long offset, int length, Encoding encoding)
-		{
-			var buffer = ArrayPool<byte>.Shared.Rent(length);
-			ReadBytes(offset, length, buffer);
-			var result = encoding.GetString(buffer, 0, length);
-			ArrayPool<byte>.Shared.Return(buffer);
-			return result;
-		}
-
-		void ReadBytes(long offset, int length, byte[] buffer)
-		{
-			var bufferOffset = 0;
-
-			while (true)
-			{
-				var accessor = GetAccessor(offset);
-				var blockSize = Math.Min(RemainingPageBytes(offset), length);
-
-				accessor.ReadArray(offset & AccessorOffsetMask, buffer, bufferOffset, blockSize);
-				length -= blockSize;
-
-				if (length == 0) break;
-
-				bufferOffset += blockSize;
-				offset += blockSize;
-			}
-		}
-
-		protected override void Dispose(bool isDisposing)
-		{
-			if (isDisposing)
-			{
-				for (var node = _mru.First; node != null; node = node.Next)
-				{
-					node.Value.Accessor.Dispose();
-				}
-
-				_mru.Clear();
-				_file.Dispose();
+				span = span.Slice(0, buffer.Length);
 			}
 
-			base.Dispose(isDisposing);
+			span.CopyTo(buffer);
+			buffer = buffer.Slice(span.Length);
+			offset += span.Length;
 		}
+	}
 
-		MemoryMappedViewAccessor GetAccessor(long address)
+	public override string ReadText(long offset, int length, Encoding encoding)
+	{
+		var buffer = ArrayPool<byte>.Shared.Rent(length);
+		ReadBytes(offset, length, buffer);
+		var result = encoding.GetString(buffer, 0, length);
+		ArrayPool<byte>.Shared.Return(buffer);
+		return result;
+	}
+
+	void ReadBytes(long offset, int length, byte[] buffer)
+	{
+		var bufferOffset = 0;
+
+		while (true)
 		{
-			var pageBaseAddress = address & AccessorPageMask;
+			var accessor = GetAccessor(offset);
+			var blockSize = Math.Min(RemainingPageBytes(offset), length);
 
+			accessor.ReadArray(offset & AccessorOffsetMask, buffer, bufferOffset, blockSize);
+			length -= blockSize;
+
+			if (length == 0) break;
+
+			bufferOffset += blockSize;
+			offset += blockSize;
+		}
+	}
+
+	protected override void Dispose(bool isDisposing)
+	{
+		if (isDisposing)
+		{
 			for (var node = _mru.First; node != null; node = node.Next)
 			{
-				var value = node.Value;
-
-				if (value.BaseAddress == pageBaseAddress)
-				{
-					if (node.Previous != null)
-					{
-						_mru.Remove(node);
-						_mru.AddFirst(node);
-					}
-
-					return value.Accessor;
-				}
-			}
-
-			var newAccessor = _file.CreateViewAccessor(pageBaseAddress, Math.Min(pageBaseAddress + PageSize, _length) - pageBaseAddress, MemoryMappedFileAccess.Read);
-
-			if (_mru.Count < 4)
-			{
-				_mru.AddFirst(new PageData(pageBaseAddress, newAccessor));
-			}
-			else
-			{
-				var node = _mru.Last!;
-				_mru.Remove(node);
 				node.Value.Accessor.Dispose();
-				node.Value = new PageData(pageBaseAddress, newAccessor);
-				_mru.AddFirst(node);
 			}
 
-			return newAccessor;
+			_mru.Clear();
+			_file.Dispose();
 		}
 
-		static int RemainingPageBytes(long offset) => (int)(PageSize - (offset & AccessorOffsetMask));
+		base.Dispose(isDisposing);
+	}
 
-		readonly long _length;
-		readonly MemoryMappedFile _file;
-		readonly LinkedList<PageData> _mru;
+	MemoryMappedViewAccessor GetAccessor(long address)
+	{
+		var pageBaseAddress = address & AccessorPageMask;
 
-		readonly struct PageData
+		for (var node = _mru.First; node != null; node = node.Next)
 		{
-			public PageData(long baseAddress, MemoryMappedViewAccessor accessor)
-			{
-				BaseAddress = baseAddress;
-				Accessor = accessor;
-			}
+			var value = node.Value;
 
-			public readonly long BaseAddress;
-			public readonly MemoryMappedViewAccessor Accessor;
+			if (value.BaseAddress == pageBaseAddress)
+			{
+				if (node.Previous != null)
+				{
+					_mru.Remove(node);
+					_mru.AddFirst(node);
+				}
+
+				return value.Accessor;
+			}
 		}
+
+		var newAccessor = _file.CreateViewAccessor(pageBaseAddress, Math.Min(pageBaseAddress + PageSize, _length) - pageBaseAddress, MemoryMappedFileAccess.Read);
+
+		if (_mru.Count < 4)
+		{
+			_mru.AddFirst(new PageData(pageBaseAddress, newAccessor));
+		}
+		else
+		{
+			var node = _mru.Last!;
+			_mru.Remove(node);
+			node.Value.Accessor.Dispose();
+			node.Value = new PageData(pageBaseAddress, newAccessor);
+			_mru.AddFirst(node);
+		}
+
+		return newAccessor;
+	}
+
+	static int RemainingPageBytes(long offset) => (int)(PageSize - (offset & AccessorOffsetMask));
+
+	readonly long _length;
+	readonly MemoryMappedFile _file;
+	readonly LinkedList<PageData> _mru;
+
+	readonly struct PageData
+	{
+		public PageData(long baseAddress, MemoryMappedViewAccessor accessor)
+		{
+			BaseAddress = baseAddress;
+			Accessor = accessor;
+		}
+
+		public readonly long BaseAddress;
+		public readonly MemoryMappedViewAccessor Accessor;
 	}
 }

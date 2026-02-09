@@ -55,6 +55,8 @@ csharp_style_inlined_variable_declaration = true:suggestion
 csharp_style_throw_expression = false:none
 csharp_style_conditional_delegate_call = true:suggestion
 
+csharp_style_namespace_declarations = file_scoped:warning
+
 # http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.CSharp.Workspaces/Formatting/CSharpFormattingOptions.cs
 
 csharp_space_between_method_declaration_name_and_open_parenthesis = false

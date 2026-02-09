@@ -4,38 +4,37 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace HexView
+namespace HexView;
+
+sealed partial class GotoDialogView : Window
 {
-	sealed partial class GotoDialogView : Window
+	public GotoDialogView()
 	{
-		public GotoDialogView()
+		InitializeComponent();
+	}
+
+	protected override void OnInitialized(EventArgs e)
+	{
+		base.OnInitialized(e);
+		PositionTextBox.Focus();
+
+		Dispatcher.BeginInvoke(PositionTextBox.SelectAll, DispatcherPriority.Loaded);
+	}
+
+	void OkClick(object sender, RoutedEventArgs e)
+	{
+		PendingChangeFlush.Flush();
+
+		if (!Validation.GetHasError(PositionTextBox))
 		{
-			InitializeComponent();
-		}
-
-		protected override void OnInitialized(EventArgs e)
-		{
-			base.OnInitialized(e);
-			PositionTextBox.Focus();
-
-			Dispatcher.BeginInvoke(PositionTextBox.SelectAll, DispatcherPriority.Loaded);
-		}
-
-		void OkClick(object sender, RoutedEventArgs e)
-		{
-			PendingChangeFlush.Flush();
-
-			if (!Validation.GetHasError(PositionTextBox))
-			{
-				DialogResult = true;
-				Close();
-			}
-		}
-
-		void CancelClick(object sender, RoutedEventArgs e)
-		{
-			DialogResult = false;
+			DialogResult = true;
 			Close();
 		}
+	}
+
+	void CancelClick(object sender, RoutedEventArgs e)
+	{
+		DialogResult = false;
+		Close();
 	}
 }
